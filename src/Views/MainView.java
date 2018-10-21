@@ -5,14 +5,21 @@
  */
 package Views;
 
+import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyEvent;
+import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 /**
  *
@@ -46,6 +53,13 @@ public class MainView extends JFrame {
 
     private JLabel lblConvertible, lblReceptorDAB, lblFaros, lblColor, lblRines;
 
+    private JButton createOrderButton, regresarButton, exitButton;
+
+    private GridBagConstraints gbc;
+    private GridBagLayout gridbag;
+
+    private JPanel panel, buttonPanel;
+
     public MainView() {
 
         cmbConvertible = new JComboBox();
@@ -77,7 +91,41 @@ public class MainView extends JFrame {
         lblColor = new JLabel("Color:");
         lblRines = new JLabel("Rines:");
 
-        JPanel buttonPanel = new JPanel();
+        createOrderButton = new JButton(CREATE_ORDER);
+        createOrderButton.setMnemonic(KeyEvent.VK_C);
+
+        regresarButton = new JButton(REGRESAR);
+        regresarButton.setMnemonic(KeyEvent.VK_R);
+
+        exitButton = new JButton(EXIT);
+        exitButton.setMnemonic(KeyEvent.VK_X);
+        //ButtonHandlerB objButtonHandler = new ButtonHandlerB(this);
+        //For layout purposes, put the buttons in a separate panel        
+        buttonPanel = new JPanel();
+        panel = new JPanel();
+
+        GridBagLayout gridbag2 = new GridBagLayout();
+        panel.setLayout(gridbag2);
+        GridBagConstraints gbc2 = new GridBagConstraints();
+
+        panel.add(createOrderButton);
+        panel.add(regresarButton);
+        panel.add(exitButton);
+        gbc2.anchor = GridBagConstraints.EAST;
+        gbc2.gridx = 0;
+        gbc2.gridy = 0;
+        gridbag2.setConstraints(regresarButton, gbc2);
+        gbc2.gridx = 1;
+        gbc2.gridy = 0;
+        gridbag2.setConstraints(createOrderButton, gbc2);
+        gbc2.gridx = 2;
+        gbc2.gridy = 0;
+        gridbag2.setConstraints(exitButton, gbc2);
+
+        //****************************************************
+        gridbag = new GridBagLayout();
+        buttonPanel.setLayout(gridbag);
+        gbc = new GridBagConstraints();
 
         buttonPanel.add(lblOrderId);
         buttonPanel.add(txtOrderId);
@@ -88,11 +136,16 @@ public class MainView extends JFrame {
         buttonPanel.add(lblColor);
         buttonPanel.add(lblRines);
 
-        //****************************************************
-        GridBagLayout gridbag = new GridBagLayout();
-        buttonPanel.setLayout(gridbag);
-        GridBagConstraints gbc = new GridBagConstraints();
+        buttonPanel.add(lblOrderId);
+        buttonPanel.add(txtOrderId);
 
+        buttonPanel.add(cmbConvertible);
+        buttonPanel.add(cmbReceptorDAB);
+        buttonPanel.add(cmbFaros);
+        //buttonPanel.add(clcColor);
+        buttonPanel.add(cmbRines);
+
+        //****************************************************
         gbc.insets.top = 5;
         gbc.insets.bottom = 5;
         gbc.insets.left = 5;
@@ -152,6 +205,25 @@ public class MainView extends JFrame {
         gbc.gridy = 5;
         gridbag.setConstraints(cmbRines, gbc);
 
+        gbc.insets.left = 2;
+        gbc.insets.right = 2;
+        gbc.insets.top = 40;
+
+        
+        //****************************************************
+        //Add the buttons and the log to the frame
+        Container contentPane = getContentPane();
+
+        contentPane.add(buttonPanel, BorderLayout.NORTH);
+        contentPane.add(panel, BorderLayout.CENTER);
+        try {
+            UIManager.setLookAndFeel(new WindowsLookAndFeel());
+            SwingUtilities.updateComponentTreeUI(
+                    MainView.this);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
     }
 
     public JComboBox getCmbConvertible() {
@@ -177,7 +249,33 @@ public class MainView extends JFrame {
     public JTextField getTxtOrderId() {
         return txtOrderId;
     }
-    
-    
+
+    public JButton getCreateOrderButton() {
+        return createOrderButton;
+    }
+
+    public JButton getRegresarButton() {
+        return regresarButton;
+    }
+
+    public JButton getExitButton() {
+        return exitButton;
+    }
+
+    public GridBagConstraints getGbc() {
+        return gbc;
+    }
+
+    public GridBagLayout getGridbag() {
+        return gridbag;
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    public JPanel getButtonPanel() {
+        return buttonPanel;
+    }
 
 }

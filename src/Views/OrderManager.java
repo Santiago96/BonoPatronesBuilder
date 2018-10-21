@@ -196,6 +196,8 @@ class ButtonHandler implements ActionListener {
   
   public void actionPerformed(ActionEvent e) {
     String totalResult = null;
+    
+    MainView mView = new MainView();
 
     if (e.getActionCommand().equals(OrderManager.EXIT)) {
       System.exit(1);
@@ -205,7 +207,9 @@ class ButtonHandler implements ActionListener {
         String orderType = objOrderManager.getOrderType();
         
         if (orderType.equalsIgnoreCase(OrderManager.FE_ORDER)) {
-            
+            IViewBuilder builder = new FerrariViewBuilder();
+            ViewDirector viewDirector = new  ViewDirector(builder);            
+            viewDirector.launchView();
             
             
             
@@ -218,7 +222,9 @@ class ButtonHandler implements ActionListener {
             
         }
         if (orderType.equalsIgnoreCase(OrderManager.LAM_ORDER)) {
-
+            IViewBuilder builder = new LamborghiniViewBuilder();
+            ViewDirector viewDirector = new  ViewDirector(builder);            
+            viewDirector.launchView();
             
         }  
     }

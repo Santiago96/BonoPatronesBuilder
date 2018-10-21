@@ -12,7 +12,11 @@ package Views;
 interface IViewBuilder {
     
     
-    public void initialize();
+    public void initializeGeneralForm();
+    public void initializePersonalizeForm();
+    public void addComponents();
+    public void componentsPosition();
+    public void addEvents();
     public void launchView();
     
 }
