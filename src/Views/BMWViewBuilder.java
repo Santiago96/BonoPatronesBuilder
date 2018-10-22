@@ -6,6 +6,7 @@
 package Views;
 
 import Model.AllBMWOrders;
+import Model.AllLamborghiniOrders;
 import Model.BMWOrder;
 import static Views.MainView.CREATE_ORDER;
 import static Views.MainView.EXIT;
@@ -93,6 +94,8 @@ public class BMWViewBuilder extends MainView implements IViewBuilder {
         lblDiseñoInt = new JLabel("Diseño Interior:");
         lblNavegacionIS = new JLabel("Navegación e Interfaz Smartphone");
         lblSElevacion = new JLabel("Sistema de elevación:");
+        
+        super.getTxtOrderId().setText(String.valueOf(AllBMWOrders.getAllBMWOrders().getData().size()+1));
 
     }
 
@@ -211,6 +214,8 @@ public class BMWViewBuilder extends MainView implements IViewBuilder {
 class ButtonHandlerB implements ActionListener {
 
     BMWViewBuilder objBMWView;
+    
+    int orderID=1;
 
     public void actionPerformed(ActionEvent e) {
 
@@ -222,6 +227,11 @@ class ButtonHandlerB implements ActionListener {
             BMWOrder bmw = capturarAtributos(objBMWView);
             AllBMWOrders allBMW = AllBMWOrders.getAllBMWOrders();
             allBMW.agregarAuto(bmw);
+            System.out.println("\nOrden "+((MainView)objBMWView).getTxtOrderId().getText()+" Creada - BMW");
+            System.out.println("Tamaño Coleccion BMW: "+allBMW.getData().size());
+            orderID = allBMW.getData().size()+1;
+            ((MainView)objBMWView).getTxtOrderId().setText(String.valueOf(orderID));
+            
         }
 
         if (e.getActionCommand().equals(REGRESAR)) {
@@ -253,15 +263,62 @@ class ButtonHandlerB implements ActionListener {
         HashMap<String, Object> data = generarData(sistemaE,navegacion,diseñoInt,orderId,convertible,receptorDAB,faros,rines,modelo);
         Vector valores = obtenerValores(sistemaE,navegacion,diseñoInt,orderId,convertible,receptorDAB,faros,rines,modelo);
         
-        return new BMWOrder();
+        return new BMWOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8), data);
     }
 
     private HashMap<String, Object> generarData(boolean sistemaE, boolean navegacion, String diseñoInt, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HashMap<String, Object> data = new HashMap();
+        data.put("SistemaElevacion", sistemaE);
+        data.put("Navegacion", navegacion);
+        data.put("DiseñoInterior", diseñoInt);
+        data.put("Order", orderId);
+        data.put("Convertible", convertible);
+        data.put("Receptor", receptorDAB);
+        data.put("Faros", faros);
+        data.put("Rines", rines);
+        data.put("Modelo", modelo);
+        return data;
     }
 
     private Vector obtenerValores(boolean sistemaE, boolean navegacion, String diseñoInt, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Vector valores = new Vector();
+        //boolean receptorDAB, String faros, String rines, String modelo 
+        if (convertible) {
+            valores.add(320.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (receptorDAB) {
+            valores.add(80.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (faros.equals(SI)) {
+            valores.add(30.0);
+        } else {
+            valores.add(0.0);
+        }
+        valores.add(50.0);
+        if (rines.equals(SI)) {
+            valores.add(65.0);
+        } else {
+            valores.add(0.0);
+        }
+        valores.add(350.0);
+        if (sistemaE) {
+            valores.add(100.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (navegacion) {
+            valores.add(500.0);
+        } else {
+            valores.add(0.0);
+        }
+        
+        valores.add(120.0);
+        
+        return valores;
     }
 
 

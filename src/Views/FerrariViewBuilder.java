@@ -76,6 +76,8 @@ public class FerrariViewBuilder extends MainView implements IViewBuilder {
         lblTapacubos = new JLabel("Tapacubos fibra Carbono:");
         lblElevadorSus = new JLabel("Elevador de Suspensión");
         lblCamaraFrontal = new JLabel("Cámara frontal (Dos vistas):");
+        
+        super.getTxtOrderId().setText(String.valueOf(AllFerrariOrders.getAllFerrariOrders().getData().size()+1));
     }
 
     @Override
@@ -200,6 +202,8 @@ public class FerrariViewBuilder extends MainView implements IViewBuilder {
 class ButtonHandlerF implements ActionListener {
 
     FerrariViewBuilder objFerrariView;
+    int orderID=1;
+    
 
     public void actionPerformed(ActionEvent e) {
 
@@ -211,8 +215,10 @@ class ButtonHandlerF implements ActionListener {
             FerrariOrder ferrari = capturarAtributos(objFerrariView);
             AllFerrariOrders allFerrari = AllFerrariOrders.getAllFerrariOrders();
             allFerrari.agregarAuto(ferrari);
-            System.out.println("Orden Creada - Ferrari");
+            System.out.println("\nOrden "+((MainView)objFerrariView).getTxtOrderId().getText()+" Creada - Ferrari");
             System.out.println("Tamaño Coleccion Ferrari: "+allFerrari.getData().size());
+            orderID = allFerrari.getData().size()+1;
+            ((MainView)objFerrariView).getTxtOrderId().setText(String.valueOf(orderID));
         }
 
         if (e.getActionCommand().equals(REGRESAR)) {
@@ -244,7 +250,7 @@ class ButtonHandlerF implements ActionListener {
         Vector valores = obtenerValores(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,rines,modelo);
         
         
-        return new FerrariOrder(1, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8), data);
+        return new FerrariOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8), data);
     }
 
     private HashMap<String, Object> generarData(boolean tapacubos, boolean elevadorSus, boolean camaraFrontal, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {

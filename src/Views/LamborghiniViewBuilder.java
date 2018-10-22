@@ -5,6 +5,7 @@
  */
 package Views;
 
+
 import Model.AllLamborghiniOrders;
 import Model.LamborghiniOrder;
 import static Views.MainView.CREATE_ORDER;
@@ -82,6 +83,8 @@ public class LamborghiniViewBuilder extends MainView implements IViewBuilder {
         lblSuspensionMR = new JLabel("Suspensión Magnética Reológica:");
         lblSEDeportivo = new JLabel("Sistema de escape deportivo");
         lblTelemetriaL = new JLabel("Telemetria Lamborghini:");
+        
+        super.getTxtOrderId().setText(String.valueOf(AllLamborghiniOrders.getAllLamborghiniOrders().getData().size()+1));
 
     }
 
@@ -202,7 +205,7 @@ public class LamborghiniViewBuilder extends MainView implements IViewBuilder {
 class ButtonHandlerL implements ActionListener {
 
     LamborghiniViewBuilder objLamborghiniView;
-
+    int orderID;
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals(EXIT)) {
@@ -214,9 +217,11 @@ class ButtonHandlerL implements ActionListener {
             LamborghiniOrder lambo = capturarAtributos(objLamborghiniView);
             AllLamborghiniOrders allLamborghini = AllLamborghiniOrders.getAllLamborghiniOrders();
             allLamborghini.agregarAuto(lambo);
-            System.out.println("Orden Creada - Lamborghini");
+            System.out.println("\nOrden "+((MainView)objLamborghiniView).getTxtOrderId().getText()+" Lamborghini");
             System.out.println("Tamaño Coleccion Lambo: "+allLamborghini.getData().size());
                     
+            orderID = allLamborghini.getData().size()+1;
+            ((MainView)objLamborghiniView).getTxtOrderId().setText(String.valueOf(orderID));
             
         }
 
@@ -249,7 +254,7 @@ class ButtonHandlerL implements ActionListener {
 
         HashMap<String, Object> data = generarData(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, rines, modelo);
         Vector valores = obtenerValores(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, rines, modelo);
-        return new LamborghiniOrder(1, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4),(double) valores.get(5), (double)valores.get(6),(double) valores.get(7), (double)valores.get(8), data);
+        return new LamborghiniOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4),(double) valores.get(5), (double)valores.get(6),(double) valores.get(7), (double)valores.get(8), data);
 
     }
 
