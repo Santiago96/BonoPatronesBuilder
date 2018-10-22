@@ -5,12 +5,17 @@
  */
 package Views;
 
+import Model.AllFerrariOrders;
+import Model.FerrariOrder;
 import static Views.MainView.CREATE_ORDER;
 import static Views.MainView.EXIT;
 import static Views.MainView.REGRESAR;
+import static Views.MainView.SI;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
@@ -152,6 +157,44 @@ public class FerrariViewBuilder extends MainView implements IViewBuilder {
         this.setVisible(true);
     }
 
+    public JComboBox getCmbModelo() {
+        return cmbModelo;
+    }
+    
+    public String getCmbModeloValue() {
+        return (String)cmbModelo.getSelectedItem();
+    }
+
+    public JComboBox getCmbTapacubos() {
+        return cmbTapacubos;
+    }
+
+    public JComboBox getCmbElevadorSus() {
+        return cmbElevadorSus;
+    }
+
+    public JComboBox getCmbCamaraFrontal() {
+        return cmbCamaraFrontal;
+    }
+
+    public JLabel getLblModelo() {
+        return lblModelo;
+    }
+
+    public JLabel getLblTapacubos() {
+        return lblTapacubos;
+    }
+
+    public JLabel getLblElevadorSus() {
+        return lblElevadorSus;
+    }
+
+    public JLabel getLblCamaraFrontal() {
+        return lblCamaraFrontal;
+    }
+    
+    
+
 }
 
 class ButtonHandlerF implements ActionListener {
@@ -164,28 +207,12 @@ class ButtonHandlerF implements ActionListener {
             System.exit(1);
         }
         if (e.getActionCommand().equals(CREATE_ORDER)) {
-            //Capturar Atributos
-            /*int orderId = Integer.parseInt(objFerrariView.getOrderID());
-            boolean convertible = objFerrariView.getCmbConvertible().equals(FerrariView.SI);
-            boolean receptorDAB = objFerrariView.getCmbReceptorDAB().equals(FerrariView.SI);
-            String faros = objFerrariView.getCmbFaros();
-            //String color = objLamborghiniView.
-            String rines = objFerrariView.getCmbRines();
-            String modelo = objFerrariView.getCmbModelo();
-            boolean tapacubos = objFerrariView.getCmbTapacubos().equals(FerrariView.SI);
-            boolean elevadorSus = objFerrariView.getCmbElevadorSus().equals(FerrariView.SI);
-            boolean camaraFrontal = objFerrariView.getCmbCamaraFrontal().equals(FerrariView.SI);
-
-            System.out.println(orderId + "\n" + convertible + "\n"
-                    + receptorDAB + "\n" + faros + "\n" + rines + "\n" + modelo
-                    + "\n" + tapacubos + "\n" + elevadorSus + "\n" + camaraFrontal);
             
-            FerrariOrderBuilder builderFerrari = FerrariOrderBuilder.getFerrariOrderBuilder();
-            OrderDirector orderDirector = new OrderDirector(builderFerrari);
-            orderDirector.agregarVehiculo(orderId,convertible,receptorDAB,faros,rines,modelo,tapacubos,elevadorSus,camaraFrontal);
-
-             */
-
+            FerrariOrder ferrari = capturarAtributos(objFerrariView);
+            AllFerrariOrders allFerrari = AllFerrariOrders.getAllFerrariOrders();
+            allFerrari.agregarAuto(ferrari);
+            System.out.println("Orden Creada - Ferrari");
+            System.out.println("Tamaño Coleccion Ferrari: "+allFerrari.getData().size());
         }
 
         if (e.getActionCommand().equals(REGRESAR)) {
@@ -199,6 +226,82 @@ class ButtonHandlerF implements ActionListener {
 
     public ButtonHandlerF(FerrariViewBuilder inObjFerrariView) {
         objFerrariView = inObjFerrariView;
+    }
+
+    private FerrariOrder capturarAtributos(FerrariViewBuilder objFerrariView) {
+        boolean tapacubos = objFerrariView.getCmbTapacubos().equals(SI);
+        boolean elevadorSus = objFerrariView.getCmbElevadorSus().equals(SI);
+        boolean camaraFrontal = objFerrariView.getCmbCamaraFrontal().equals(SI);
+        int orderId = Integer.parseInt(objFerrariView.getTxtOrderId().getText());
+        boolean convertible = objFerrariView.getCmbConvertible().equals(SI);
+        boolean receptorDAB = objFerrariView.getCmbReceptorDAB().equals(SI);
+        String faros = objFerrariView.getCmbFaros();
+        //String color = objLamborghiniView.
+        String rines = objFerrariView.getCmbRines();
+        String modelo = objFerrariView.getCmbModeloValue();
+        
+        HashMap<String, Object> data = generarData(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,rines,modelo);
+        Vector valores = obtenerValores(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,rines,modelo);
+        
+        
+        return new FerrariOrder(1, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8), data);
+    }
+
+    private HashMap<String, Object> generarData(boolean tapacubos, boolean elevadorSus, boolean camaraFrontal, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+        HashMap<String, Object> data = new HashMap();
+        data.put("TapaCubos", tapacubos);
+        data.put("ElevadorSuspension", elevadorSus);
+        data.put("CamaraFrontal", camaraFrontal);
+        data.put("Order", orderId);
+        data.put("Convertible", convertible);
+        data.put("Receptor", receptorDAB);
+        data.put("Faros", faros);
+        data.put("Rines", rines);
+        data.put("Modelo", modelo);
+        return data;
+    }
+
+    private Vector obtenerValores(boolean tapacubos, boolean elevadorSus, boolean camaraFrontal, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+        Vector valores = new Vector();
+        //boolean receptorDAB, String faros, String rines, String modelo 
+        if (convertible) {
+            valores.add(320.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (receptorDAB) {
+            valores.add(80.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (faros.equals(SI)) {
+            valores.add(30.0);
+        } else {
+            valores.add(0.0);
+        }
+        valores.add(50.0);
+        if (rines.equals(SI)) {
+            valores.add(65.0);
+        } else {
+            valores.add(0.0);
+        }
+        valores.add(350.0);
+        if (tapacubos) {
+            valores.add(100.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (elevadorSus) {
+            valores.add(500.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (camaraFrontal) {
+            valores.add(120.0);
+        } else {
+            valores.add(0.0);
+        }
+        return valores;
     }
 
 } // End of class ButtonHandler

@@ -79,4 +79,10 @@ public class AllLamborghiniOrders implements Iterator {
 
     }
 
+    public Vector getData() {
+        return data;
+    }
+    
+    
+
 }

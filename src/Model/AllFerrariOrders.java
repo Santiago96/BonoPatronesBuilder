@@ -5,7 +5,10 @@
  */
 package Model;
 
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Vector;
 
 /**
  *
@@ -75,5 +78,11 @@ public class AllFerrariOrders implements Iterator {
     public void remove() {
 
     }
+
+    public Vector getData() {
+        return data;
+    }
+    
+    
 
 }

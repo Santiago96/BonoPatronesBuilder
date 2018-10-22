@@ -78,4 +78,11 @@ public class AllBMWOrders implements IAllAutos,Iterator {
 
     }
 
+    public Vector getData() {
+        return data;
+    }
+    
+    
+    
+
 }

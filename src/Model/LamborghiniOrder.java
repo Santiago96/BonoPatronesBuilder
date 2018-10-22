@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.HashMap;
+
 /**
  *
  * @author olixe
@@ -18,11 +20,15 @@ public class LamborghiniOrder implements Order {
     private double vColor;
     private double vRines;
     private double vModelo;
-    private boolean suspensionMR;
-    private boolean sEDeportivo;
-    private boolean telemetriaL;
+    private double suspensionMR;
+    private double sEDeportivo;
+    private double telemetriaL;
 
-    public LamborghiniOrder(int orderId, double vConvertible, double vReceptorDAB, double vFaros, double vColor, double vRines, double vModelo, boolean suspensionMR) {
+    private HashMap<String, Object> datos;
+
+
+
+    public LamborghiniOrder(int orderId, double vConvertible, double vReceptorDAB, double vFaros, double vColor, double vRines, double vModelo, double suspensionMR, double sEDeportivo, double telemetriaL,HashMap<String,Object> datos) {
         this.orderId = orderId;
         this.vConvertible = vConvertible;
         this.vReceptorDAB = vReceptorDAB;
@@ -31,6 +37,9 @@ public class LamborghiniOrder implements Order {
         this.vRines = vRines;
         this.vModelo = vModelo;
         this.suspensionMR = suspensionMR;
+        this.sEDeportivo = sEDeportivo;
+        this.telemetriaL = telemetriaL;
+        this.datos = datos;
     }
 
     @Override
@@ -86,28 +95,48 @@ public class LamborghiniOrder implements Order {
         this.vModelo = vModelo;
     }
 
-    public boolean isSuspensionMR() {
+    public double isSuspensionMR() {
         return suspensionMR;
     }
 
-    public void setSuspensionMR(boolean suspensionMR) {
+    public void setSuspensionMR(double suspensionMR) {
         this.suspensionMR = suspensionMR;
     }
 
-    public boolean issEDeportivo() {
+    public double issEDeportivo() {
         return sEDeportivo;
     }
 
-    public void setsEDeportivo(boolean sEDeportivo) {
+    public void setsEDeportivo(double sEDeportivo) {
         this.sEDeportivo = sEDeportivo;
     }
 
-    public boolean isTelemetriaL() {
+    public double isTelemetriaL() {
         return telemetriaL;
     }
 
-    public void setTelemetriaL(boolean telemetriaL) {
+    public void setTelemetriaL(double telemetriaL) {
         this.telemetriaL = telemetriaL;
+    }
+
+    public HashMap<String, Object> getDatos() {
+        return datos;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public double getSuspensionMR() {
+        return suspensionMR;
+    }
+
+    public double getsEDeportivo() {
+        return sEDeportivo;
+    }
+
+    public double getTelemetriaL() {
+        return telemetriaL;
     }
     
     

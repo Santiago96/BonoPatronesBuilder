@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.HashMap;
+
 /**
  *
  * @author olixe
@@ -21,8 +23,10 @@ public class FerrariOrder implements Order {
     private double vTapacubos;
     private double vElevadorSus;
     private double vCamaraFrontal;
+    
+    private HashMap<String,Object> datos;
 
-    public FerrariOrder(int orderId, double vConvertible, double vReceptorDAB, double vFaros, double vColor, double vRines, double vModelo, double vTapacubos, double vElevadorSus, double vCamaraFrontal) {
+    public FerrariOrder(int orderId, double vConvertible, double vReceptorDAB, double vFaros, double vColor, double vRines, double vModelo, double vTapacubos, double vElevadorSus, double vCamaraFrontal,HashMap<String,Object> datos) {
         this.orderId = orderId;
         this.vConvertible = vConvertible;
         this.vReceptorDAB = vReceptorDAB;
@@ -33,6 +37,7 @@ public class FerrariOrder implements Order {
         this.vTapacubos = vTapacubos;
         this.vElevadorSus = vElevadorSus;
         this.vCamaraFrontal = vCamaraFrontal;
+        this.datos = datos;        
     }
 
     @Override
@@ -118,6 +123,14 @@ public class FerrariOrder implements Order {
 
     public void setvCamaraFrontal(double vCamaraFrontal) {
         this.vCamaraFrontal = vCamaraFrontal;
+    }
+    
+    public HashMap<String, Object> getDatos() {
+        return datos;
+    }
+
+    public void setDatos(HashMap<String, Object> datos) {
+        this.datos = datos;
     }
     
     

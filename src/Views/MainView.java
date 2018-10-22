@@ -25,7 +25,7 @@ import javax.swing.UIManager;
  *
  * @author Santiago
  */
-public class MainView extends JFrame {
+public abstract class MainView extends JFrame {
 
     public static final String CREATE_ORDER = "Create Order";
     public static final String REGRESAR = "Regresar";
@@ -55,9 +55,9 @@ public class MainView extends JFrame {
 
     private JButton createOrderButton, regresarButton, exitButton;
 
-    private GridBagConstraints gbc;
-    private GridBagLayout gridbag;
-
+    private GridBagConstraints gbc,gbc2;
+    private GridBagLayout gridbag,gridbag2;
+    
     private JPanel panel, buttonPanel;
 
     public MainView() {
@@ -82,6 +82,12 @@ public class MainView extends JFrame {
         cmbRines.addItem(MainView.R22);
 
         txtOrderId = new JTextField(10);
+        txtOrderId.setEditable(false);
+        boolean primera = true;
+        if(primera){
+            txtOrderId.setText("1");
+            primera = false;
+        }
 
         lblOrderId = new JLabel("Order ID:");
 
@@ -104,9 +110,9 @@ public class MainView extends JFrame {
         buttonPanel = new JPanel();
         panel = new JPanel();
 
-        GridBagLayout gridbag2 = new GridBagLayout();
+        gridbag2 = new GridBagLayout();
         panel.setLayout(gridbag2);
-        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2 = new GridBagConstraints();
 
         panel.add(createOrderButton);
         panel.add(regresarButton);
@@ -226,29 +232,34 @@ public class MainView extends JFrame {
 
     }
 
-    public JComboBox getCmbConvertible() {
-        return cmbConvertible;
+    public String getCmbConvertible() {
+        return (String)cmbConvertible.getSelectedItem();
     }
 
-    public JComboBox getCmbReceptorDAB() {
-        return cmbReceptorDAB;
+    public String getCmbReceptorDAB() {
+        return (String)cmbReceptorDAB.getSelectedItem();
     }
 
-    public JComboBox getCmbFaros() {
-        return cmbFaros;
+    public String getCmbFaros() {
+        return (String)cmbFaros.getSelectedItem();
     }
 
     public JColorChooser getClcColor() {
         return clcColor;
     }
 
-    public JComboBox getCmbRines() {
-        return cmbRines;
+    public String getCmbRines() {
+        return (String)cmbRines.getSelectedItem();
     }
 
     public JTextField getTxtOrderId() {
         return txtOrderId;
     }
+
+    public void setTxtOrderId(JTextField txtOrderId) {
+        this.txtOrderId = txtOrderId;
+    }
+    
 
     public JButton getCreateOrderButton() {
         return createOrderButton;
@@ -269,6 +280,16 @@ public class MainView extends JFrame {
     public GridBagLayout getGridbag() {
         return gridbag;
     }
+
+    public GridBagConstraints getGbc2() {
+        return gbc2;
+    }
+
+    public GridBagLayout getGridbag2() {
+        return gridbag2;
+    }
+    
+    
 
     public JPanel getPanel() {
         return panel;

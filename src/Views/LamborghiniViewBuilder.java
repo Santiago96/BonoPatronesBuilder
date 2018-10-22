@@ -5,13 +5,18 @@
  */
 package Views;
 
+import Model.AllLamborghiniOrders;
+import Model.LamborghiniOrder;
 import static Views.MainView.CREATE_ORDER;
 import static Views.MainView.EXIT;
 import static Views.MainView.REGRESAR;
+import static Views.MainView.SI;
 
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
@@ -156,6 +161,42 @@ public class LamborghiniViewBuilder extends MainView implements IViewBuilder {
         this.setVisible(true);
     }
 
+    public JComboBox getCmbModelo() {
+        return cmbModelo;
+    }
+
+    public String getCmbModeloValue() {
+        return (String) cmbModelo.getSelectedItem();
+    }
+
+    public JComboBox getCmbSuspensionMR() {
+        return cmbSuspensionMR;
+    }
+
+    public JComboBox getCmbSEDeportivo() {
+        return cmbSEDeportivo;
+    }
+
+    public JComboBox getCmbTelemetriaL() {
+        return cmbTelemetriaL;
+    }
+
+    public JLabel getLblModelo() {
+        return lblModelo;
+    }
+
+    public JLabel getLblSuspensionMR() {
+        return lblSuspensionMR;
+    }
+
+    public JLabel getLblSEDeportivo() {
+        return lblSEDeportivo;
+    }
+
+    public JLabel getLblTelemetriaL() {
+        return lblTelemetriaL;
+    }
+
 }
 
 class ButtonHandlerL implements ActionListener {
@@ -168,26 +209,15 @@ class ButtonHandlerL implements ActionListener {
             System.exit(1);
         }
         if (e.getActionCommand().equals(CREATE_ORDER)) {
-            /*
-            //Capturar Atributos
-            boolean suspensionMR = objLamborghiniView.getCmbSuspensionMR().equals("Si");
-            boolean sEDeportivo = objLamborghiniView.getCmbSEDeportivo().equals("Si");
-            boolean telemetriaL = objLamborghiniView.getCmbTelemetriaL().equals("Si");
-            int orderId = Integer.parseInt(objLamborghiniView.getOrderID());
-            boolean convertible = objLamborghiniView.getCmbConvertible().equals("Si");
-            boolean receptorDAB = objLamborghiniView.getCmbReceptorDAB().equals("Si");
-            String faros = objLamborghiniView.getCmbFaros();
-            //String color = objLamborghiniView.
-            String rines = objLamborghiniView.getCmbRines();
-            String modelo = objLamborghiniView.getCmbModelo();
 
             //Crear objeto de tipo Lambo pasando por parametro los datos
-            Lamborghini lambo = new Lamborghini(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, modelo, rines, modelo);
-
-            //Enviar al Builder
-            LamborghiniOrderBuilder l = LamborghiniOrderBuilder.getLamborghiniOrderBuilder();
-            l.agregarVehiculo(lambo);*/
-
+            LamborghiniOrder lambo = capturarAtributos(objLamborghiniView);
+            AllLamborghiniOrders allLamborghini = AllLamborghiniOrders.getAllLamborghiniOrders();
+            allLamborghini.agregarAuto(lambo);
+            System.out.println("Orden Creada - Lamborghini");
+            System.out.println("Tamaño Coleccion Lambo: "+allLamborghini.getData().size());
+                    
+            
         }
 
         if (e.getActionCommand().equals(REGRESAR)) {
@@ -201,6 +231,83 @@ class ButtonHandlerL implements ActionListener {
 
     public ButtonHandlerL(LamborghiniViewBuilder inObjLamborghiniView) {
         objLamborghiniView = inObjLamborghiniView;
+    }
+
+    private LamborghiniOrder capturarAtributos(LamborghiniViewBuilder objLamborghiniView) {
+        //Capturar Atributos
+
+        boolean suspensionMR = objLamborghiniView.getCmbSuspensionMR().equals(SI);
+        boolean sEDeportivo = objLamborghiniView.getCmbSEDeportivo().equals(SI);
+        boolean telemetriaL = objLamborghiniView.getCmbTelemetriaL().equals(SI);
+        int orderId = Integer.parseInt(objLamborghiniView.getTxtOrderId().getText());
+        boolean convertible = objLamborghiniView.getCmbConvertible().equals(SI);
+        boolean receptorDAB = objLamborghiniView.getCmbReceptorDAB().equals(SI);
+        String faros = objLamborghiniView.getCmbFaros();
+        //String color = objLamborghiniView.
+        String rines = objLamborghiniView.getCmbRines();
+        String modelo = objLamborghiniView.getCmbModeloValue();
+
+        HashMap<String, Object> data = generarData(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, rines, modelo);
+        Vector valores = obtenerValores(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, rines, modelo);
+        return new LamborghiniOrder(1, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4),(double) valores.get(5), (double)valores.get(6),(double) valores.get(7), (double)valores.get(8), data);
+
+    }
+
+    private HashMap<String, Object> generarData(boolean suspensionMR, boolean sEDeportivo, boolean telemetriaL, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+        HashMap<String, Object> data = new HashMap();
+        data.put("Suspension", suspensionMR);
+        data.put("Deportivo", sEDeportivo);
+        data.put("Telemetria", telemetriaL);
+        data.put("Order", orderId);
+        data.put("Convertible", convertible);
+        data.put("Receptor", receptorDAB);
+        data.put("Faros", faros);
+        data.put("Rines", rines);
+        data.put("Modelo", modelo);
+        return data;
+    }
+
+    private Vector obtenerValores(boolean suspensionMR, boolean sEDeportivo, boolean telemetriaL, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+        Vector valores = new Vector();
+        //boolean receptorDAB, String faros, String rines, String modelo 
+        if (convertible) {
+            valores.add(320.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (receptorDAB) {
+            valores.add(80.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (faros.equals(SI)) {
+            valores.add(30.0);
+        } else {
+            valores.add(0.0);
+        }
+        valores.add(50.0);
+        if (rines.equals(SI)) {
+            valores.add(65.0);
+        } else {
+            valores.add(0.0);
+        }
+        valores.add(350.0);
+        if (suspensionMR) {
+            valores.add(100.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (sEDeportivo) {
+            valores.add(500.0);
+        } else {
+            valores.add(0.0);
+        }
+        if (telemetriaL) {
+            valores.add(120.0);
+        } else {
+            valores.add(0.0);
+        }
+        return valores;
     }
 
 }

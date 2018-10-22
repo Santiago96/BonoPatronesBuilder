@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.HashMap;
+
 /**
  *
  * @author olixe
@@ -21,8 +23,10 @@ public class BMWOrder implements Order {
     private double vDiseñoInt;
     private double vNavegacionIS;
     private double vElevacion;
+    
+    private HashMap<String,Object> datos;
 
-    public BMWOrder(int orderId, double vConvertible, double vReceptorDAB, double vFaros, double vColor, double vRines, double vModelo, double vDiseñoInt, double vNavegacionIS, double vElevacion) {
+    public BMWOrder(int orderId, double vConvertible, double vReceptorDAB, double vFaros, double vColor, double vRines, double vModelo, double vDiseñoInt, double vNavegacionIS, double vElevacion,HashMap<String,Object> datos) {
         this.orderId = orderId;
         this.vConvertible = vConvertible;
         this.vReceptorDAB = vReceptorDAB;
@@ -33,6 +37,7 @@ public class BMWOrder implements Order {
         this.vDiseñoInt = vDiseñoInt;
         this.vNavegacionIS = vNavegacionIS;
         this.vElevacion = vElevacion;
+        this.datos = datos;
     }
 
     @Override
@@ -111,5 +116,17 @@ public class BMWOrder implements Order {
     public void setvElevacion(double vElevacion) {
         this.vElevacion = vElevacion;
     }
+
+    public HashMap<String, Object> getDatos() {
+        return datos;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+    
+    
+    
+    
 
 }
