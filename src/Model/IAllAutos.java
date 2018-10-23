@@ -12,5 +12,4 @@ package Model;
 public interface IAllAutos {
 
     public void agregarAuto(Order v);
-    public void liquidarColeccion();
 }

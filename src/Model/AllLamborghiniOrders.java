@@ -18,12 +18,10 @@ public class AllLamborghiniOrders implements Iterator {
 
     private static AllLamborghiniOrders allLamborghiniOrder;
     private Vector data;
-    private OrderVisitor objVisitor;
     private Enumeration ec;
     private LamborghiniOrder nextLamborghiniOrder;
 
     private AllLamborghiniOrders() {
-        objVisitor = new OrderVisitor(); //Ejemplificar en ButtonHandler
         data = new Vector();
 
     }
@@ -36,24 +34,15 @@ public class AllLamborghiniOrders implements Iterator {
     }
 
     public void agregarAuto(Order v) {
-        // Se ejemplifica en ButtonHandler
         data.add(v);
     }
 
-    //Método que se puede desarrollar en ButtonHandler
-    public void liquidarColeccion() {
+    public void a() {
         ec = data.elements();
-
-        while (hasNext()) {
-            Order f = (LamborghiniOrder) next();
-            f.accept(objVisitor);
-        }
     }
 
     @Override
     public boolean hasNext() {
-
-        boolean matchFound = false;
         nextLamborghiniOrder = null;
 
         while (ec.hasMoreElements()) {
@@ -82,7 +71,5 @@ public class AllLamborghiniOrders implements Iterator {
     public Vector getData() {
         return data;
     }
-    
-    
 
 }

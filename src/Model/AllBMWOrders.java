@@ -14,17 +14,15 @@ import java.util.Vector;
  *
  * @author olixe
  */
-public class AllBMWOrders implements IAllAutos,Iterator {
+public class AllBMWOrders implements IAllAutos, Iterator {
 
     private static AllBMWOrders allBMWOrder;
     private Vector data;
     private Enumeration ec;
     private BMWOrder nextBMWOrder;
-    private OrderVisitor objVisitor;
 
     private AllBMWOrders() {
         data = new Vector();
-        objVisitor = new OrderVisitor();
     }
 
     public static AllBMWOrders getAllBMWOrders() {
@@ -34,19 +32,13 @@ public class AllBMWOrders implements IAllAutos,Iterator {
         return allBMWOrder;
     }
 
+    @Override
     public void agregarAuto(Order v) {
-        // Se ejemplifica en ButtonHandler
         data.add(v);
     }
 
-    //Método que se puede desarrollar en ButtonHandler
-    public void liquidarColeccion() {
+    public void a() {
         ec = data.elements();
-
-        while (hasNext()) {
-            Order f = (BMWOrder) next();
-            f.accept(objVisitor);
-        }
     }
 
     @Override
@@ -81,8 +73,5 @@ public class AllBMWOrders implements IAllAutos,Iterator {
     public Vector getData() {
         return data;
     }
-    
-    
-    
 
 }

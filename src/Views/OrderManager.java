@@ -6,6 +6,7 @@ import Model.AllLamborghiniOrders;
 import Model.BMWOrder;
 import Model.FerrariOrder;
 import Model.LamborghiniOrder;
+import Model.OrderVisitor;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -29,11 +30,12 @@ public class OrderManager extends JFrame {
 
     private JLabel lblTotal, lblTotalValue;
 
+    private OrderVisitor objVisitor;
+
     public OrderManager() {
         super("Cars Orders");
 
-        //Create the visitor instance
-//    objVisitor = new OrderVisitor();
+        objVisitor = new OrderVisitor();
         cmbOrderType = new JComboBox();
         cmbOrderType.addItem(OrderManager.FE_ORDER);
         cmbOrderType.addItem(OrderManager.BMW_ORDER);
@@ -160,6 +162,10 @@ public class OrderManager extends JFrame {
 
     }
 
+    public OrderVisitor getObjVisitor() {
+        return objVisitor;
+    }
+
     public static void main(String[] args) {
         JFrame frame = new OrderManager();
 
@@ -238,7 +244,7 @@ class ButtonHandler implements ActionListener {
                     }
                 }
                 if (true/*orderFerrari!=null*/) {
-                    IViewBuilder builder = new QueryViewBuilder(new FerrariViewBuilder(),orderFerrari);
+                    IViewBuilder builder = new QueryViewBuilder(new FerrariViewBuilder(), orderFerrari);
                     ViewDirector viewDirector = new ViewDirector(builder);
                     viewDirector.launchView();
                 } else {
@@ -257,30 +263,30 @@ class ButtonHandler implements ActionListener {
                     }
                 }
                 if (true/*orderFerrari!=null*/) {
-                    IViewBuilder builder = new QueryViewBuilder(new BMWViewBuilder(),orderBMW);
+                    IViewBuilder builder = new QueryViewBuilder(new BMWViewBuilder(), orderBMW);
                     ViewDirector viewDirector = new ViewDirector(builder);
                     viewDirector.launchView();
-                }else{
-                
+                } else {
+
                 }
             }
             if (orderType.equalsIgnoreCase(OrderManager.LAM_ORDER)) {
-                
+
                 AllLamborghiniOrders allBMW = AllLamborghiniOrders.getAllLamborghiniOrders();
-                LamborghiniOrder orderLamborghini= null;
+                LamborghiniOrder orderLamborghini = null;
                 while (allBMW.hasNext() && orderLamborghini == null) {
                     orderLamborghini = (LamborghiniOrder) allBMW.next();
                     if (orderLamborghini.getOrderId() == orderID) {
                         break;
                     }
                 }
-                
-                if(true/*orderFerrari!=null*/){
-                    IViewBuilder builder = new QueryViewBuilder(new LamborghiniViewBuilder(),orderLamborghini);
+
+                if (true/*orderFerrari!=null*/) {
+                    IViewBuilder builder = new QueryViewBuilder(new LamborghiniViewBuilder(), orderLamborghini);
                     ViewDirector viewDirector = new ViewDirector(builder);
                     viewDirector.launchView();
-                }else{
-                
+                } else {
+
                 }
 
             }
@@ -289,6 +295,37 @@ class ButtonHandler implements ActionListener {
 
         if (e.getActionCommand().equals(OrderManager.GET_TOTAL)) {
 
+            OrderVisitor visitor = objOrderManager.getObjVisitor();
+            visitor.setOrderTotal(0);
+
+//Ferrari
+            AllFerrariOrders allFerrari = AllFerrariOrders.getAllFerrariOrders();
+            allFerrari.a();
+
+            while (allFerrari.hasNext()) {
+                FerrariOrder ferrariOrder = (FerrariOrder) allFerrari.next();
+                ferrariOrder.accept(visitor);
+            }
+
+//BMW
+            AllBMWOrders allBMW = AllBMWOrders.getAllBMWOrders();
+            allBMW.a();
+            while (allBMW.hasNext()) {
+                BMWOrder bmwOrder = (BMWOrder) allBMW.next();
+                bmwOrder.accept(visitor);
+            }
+
+//Lamborghini
+
+            AllLamborghiniOrders allLamborghini = AllLamborghiniOrders.getAllLamborghiniOrders();
+            allLamborghini.a();
+            while (allLamborghini.hasNext()) {
+                LamborghiniOrder lamborghiniOrder = (LamborghiniOrder) allLamborghini.next();
+                lamborghiniOrder.accept(visitor);
+            }
+            
+            totalResult = String.valueOf(visitor.getOrderTotal());
+            objOrderManager.setTotalValue(totalResult);
         }
     }
 
@@ -298,8 +335,6 @@ class ButtonHandler implements ActionListener {
     public ButtonHandler(OrderManager inObjOrderManager) {
         objOrderManager = inObjOrderManager;
     }
-    
-    
 
 } // End of class ButtonHandler
 

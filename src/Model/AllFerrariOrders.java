@@ -18,48 +18,39 @@ public class AllFerrariOrders implements Iterator {
 
     private static AllFerrariOrders allFerrariOrder;
     private Vector data;
-    private OrderVisitor objVisitor;
     private Enumeration ec;
     private FerrariOrder nextFerrariOrder;
 
     private AllFerrariOrders() {
-        objVisitor = new OrderVisitor(); //Ejemplificar en ButtonHandler
         data = new Vector();
 
     }
 
-    public static AllFerrariOrders getAllFerrariOrders() {
+    public synchronized static AllFerrariOrders getAllFerrariOrders() {
         if (allFerrariOrder == null) {
             allFerrariOrder = new AllFerrariOrders();
         }
         return allFerrariOrder;
     }
 
-    public void agregarAuto(Order v ) {
-        // Se ejemplifica en ButtonHandler
+    public void agregarAuto(Order v) {
         data.add(v);
     }
-    
-    //Método que se puede desarrollar en ButtonHandler
-    public void liquidarColeccion() {
-        ec = data.elements();
 
-        while (hasNext()) {
-            Order f = (FerrariOrder) next();
-            f.accept(objVisitor);
-        }
+    public void a() {
+        ec = data.elements();
     }
-    
+
     @Override
     public boolean hasNext() {
 
-        boolean matchFound = false;
         nextFerrariOrder = null;
 
         while (ec.hasMoreElements()) {
             nextFerrariOrder = (FerrariOrder) ec.nextElement();
             break;
         }
+        
         return (nextFerrariOrder != null);
     }
 
@@ -67,6 +58,7 @@ public class AllFerrariOrders implements Iterator {
     public Object next() {
 
         if (nextFerrariOrder == null) {
+            System.out.println("hola");
             throw new NoSuchElementException();
         } else {
             return nextFerrariOrder;
@@ -82,7 +74,5 @@ public class AllFerrariOrders implements Iterator {
     public Vector getData() {
         return data;
     }
-    
-    
 
 }

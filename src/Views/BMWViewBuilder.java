@@ -12,6 +12,7 @@ import static Views.MainView.CREATE_ORDER;
 import static Views.MainView.EXIT;
 import static Views.MainView.REGRESAR;
 import static Views.MainView.SI;
+import static Views.MainView.*;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -94,8 +95,8 @@ public class BMWViewBuilder extends MainView implements IViewBuilder {
         lblDiseñoInt = new JLabel("Diseño Interior:");
         lblNavegacionIS = new JLabel("Navegación e Interfaz Smartphone");
         lblSElevacion = new JLabel("Sistema de elevación:");
-        
-        super.getTxtOrderId().setText(String.valueOf(AllBMWOrders.getAllBMWOrders().getData().size()+1));
+
+        super.getTxtOrderId().setText(String.valueOf(AllBMWOrders.getAllBMWOrders().getData().size() + 1));
 
     }
 
@@ -172,17 +173,17 @@ public class BMWViewBuilder extends MainView implements IViewBuilder {
     public JComboBox getCmbModelo() {
         return cmbModelo;
     }
-    
-    public String getCmbModeloValue(){
-        return (String)cmbModelo.getSelectedItem();
+
+    public String getCmbModeloValue() {
+        return (String) cmbModelo.getSelectedItem();
     }
 
     public JComboBox getCmbDiseñoInt() {
         return cmbDiseñoInt;
     }
-    
+
     public String getCmbDiseñoIntValue() {
-        return (String)cmbDiseñoInt.getSelectedItem();
+        return (String) cmbDiseñoInt.getSelectedItem();
     }
 
     public JComboBox getCmbNavegacionIS() {
@@ -214,8 +215,8 @@ public class BMWViewBuilder extends MainView implements IViewBuilder {
 class ButtonHandlerB implements ActionListener {
 
     BMWViewBuilder objBMWView;
-    
-    int orderID=1;
+
+    int orderID = 1;
 
     public void actionPerformed(ActionEvent e) {
 
@@ -227,11 +228,11 @@ class ButtonHandlerB implements ActionListener {
             BMWOrder bmw = capturarAtributos(objBMWView);
             AllBMWOrders allBMW = AllBMWOrders.getAllBMWOrders();
             allBMW.agregarAuto(bmw);
-            System.out.println("\nOrden "+((MainView)objBMWView).getTxtOrderId().getText()+" Creada - BMW");
-            System.out.println("Tamaño Coleccion BMW: "+allBMW.getData().size());
-            orderID = allBMW.getData().size()+1;
-            ((MainView)objBMWView).getTxtOrderId().setText(String.valueOf(orderID));
-            
+            System.out.println("\nOrden " + ((MainView) objBMWView).getTxtOrderId().getText() + " Creada - BMW");
+            System.out.println("Tamaño Coleccion BMW: " + allBMW.getData().size());
+            orderID = allBMW.getData().size() + 1;
+            ((MainView) objBMWView).getTxtOrderId().setText(String.valueOf(orderID));
+
         }
 
         if (e.getActionCommand().equals(REGRESAR)) {
@@ -249,21 +250,24 @@ class ButtonHandlerB implements ActionListener {
     }
 
     private BMWOrder capturarAtributos(BMWViewBuilder objBMWView) {
-        boolean sistemaE = objBMWView.getCmbSElevacion().equals(SI);
-        boolean navegacion = objBMWView.getCmbNavegacionIS().equals(SI);
+        boolean sistemaE = objBMWView.getCmbSElevacion().getSelectedItem().equals(SI);
+        boolean navegacion = objBMWView.getCmbNavegacionIS().getSelectedItem().equals(SI);
         String diseñoInt = objBMWView.getCmbDiseñoIntValue();
         int orderId = Integer.parseInt(objBMWView.getTxtOrderId().getText());
         boolean convertible = objBMWView.getCmbConvertible().equals(SI);
         boolean receptorDAB = objBMWView.getCmbReceptorDAB().equals(SI);
         String faros = objBMWView.getCmbFaros();
+        System.out.println(objBMWView.getCmbFaros());
         //String color = objLamborghiniView.
         String rines = objBMWView.getCmbRines();
         String modelo = objBMWView.getCmbModeloValue();
         
-        HashMap<String, Object> data = generarData(sistemaE,navegacion,diseñoInt,orderId,convertible,receptorDAB,faros,rines,modelo);
-        Vector valores = obtenerValores(sistemaE,navegacion,diseñoInt,orderId,convertible,receptorDAB,faros,rines,modelo);
-        
-        return new BMWOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8), data);
+        System.out.println(navegacion);
+
+        HashMap<String, Object> data = generarData(sistemaE, navegacion, diseñoInt, orderId, convertible, receptorDAB, faros, rines, modelo);
+        Vector valores = obtenerValores(sistemaE, navegacion, diseñoInt, orderId, convertible, receptorDAB, faros, rines, modelo);
+
+        return new BMWOrder(orderID, (double) valores.get(0), (double) valores.get(1), (double) valores.get(2), (double) valores.get(3), (double) valores.get(4), (double) valores.get(5), (double) valores.get(6), (double) valores.get(7), (double) valores.get(8), data);
     }
 
     private HashMap<String, Object> generarData(boolean sistemaE, boolean navegacion, String diseñoInt, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
@@ -293,14 +297,20 @@ class ButtonHandlerB implements ActionListener {
         } else {
             valores.add(0.0);
         }
-        if (faros.equals(SI)) {
+        if (faros.equals(LED)) {
             valores.add(30.0);
+        } else if (faros.equals(LASER)) {
+            valores.add(50.0);
         } else {
             valores.add(0.0);
         }
+        
         valores.add(50.0);
-        if (rines.equals(SI)) {
+        
+        if (rines.equals(R20)) {
             valores.add(65.0);
+        } else if (rines.equals(R21)) {
+            valores.add(70.0);
         } else {
             valores.add(0.0);
         }
@@ -315,11 +325,10 @@ class ButtonHandlerB implements ActionListener {
         } else {
             valores.add(0.0);
         }
-        
+
         valores.add(120.0);
-        
+
         return valores;
     }
-
 
 } // End of class ButtonHandler
