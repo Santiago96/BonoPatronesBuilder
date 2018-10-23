@@ -7,10 +7,7 @@ package Views;
 
 import Model.AllFerrariOrders;
 import Model.FerrariOrder;
-import static Views.MainView.CREATE_ORDER;
-import static Views.MainView.EXIT;
-import static Views.MainView.REGRESAR;
-import static Views.MainView.SI;
+import static Views.MainView.*;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -235,15 +232,15 @@ class ButtonHandlerF implements ActionListener {
     }
 
     private FerrariOrder capturarAtributos(FerrariViewBuilder objFerrariView) {
-        boolean tapacubos = objFerrariView.getCmbTapacubos().equals(SI);
-        boolean elevadorSus = objFerrariView.getCmbElevadorSus().equals(SI);
-        boolean camaraFrontal = objFerrariView.getCmbCamaraFrontal().equals(SI);
+        String tapacubos = (String)objFerrariView.getCmbTapacubos().getSelectedItem();
+        String elevadorSus = (String)objFerrariView.getCmbElevadorSus().getSelectedItem();
+        String camaraFrontal = (String)objFerrariView.getCmbCamaraFrontal().getSelectedItem();
         int orderId = Integer.parseInt(objFerrariView.getTxtOrderId().getText());
-        boolean convertible = objFerrariView.getCmbConvertible().equals(SI);
-        boolean receptorDAB = objFerrariView.getCmbReceptorDAB().equals(SI);
-        String faros = objFerrariView.getCmbFaros();
+        String convertible = objFerrariView.getCmbConvertibleValue();
+        String receptorDAB = objFerrariView.getCmbReceptorDABValue();
+        String faros = objFerrariView.getCmbFarosValue();
         //String color = objLamborghiniView.
-        String rines = objFerrariView.getCmbRines();
+        String rines = objFerrariView.getCmbRinesValue();
         String modelo = objFerrariView.getCmbModeloValue();
         
         HashMap<String, Object> data = generarData(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,rines,modelo);
@@ -253,7 +250,7 @@ class ButtonHandlerF implements ActionListener {
         return new FerrariOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8), data);
     }
 
-    private HashMap<String, Object> generarData(boolean tapacubos, boolean elevadorSus, boolean camaraFrontal, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+    private HashMap<String, Object> generarData(String tapacubos, String elevadorSus, String camaraFrontal, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
         HashMap<String, Object> data = new HashMap();
         data.put("TapaCubos", tapacubos);
         data.put("ElevadorSuspension", elevadorSus);
@@ -267,42 +264,46 @@ class ButtonHandlerF implements ActionListener {
         return data;
     }
 
-    private Vector obtenerValores(boolean tapacubos, boolean elevadorSus, boolean camaraFrontal, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+    private Vector obtenerValores(String tapacubos, String elevadorSus, String camaraFrontal, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
         Vector valores = new Vector();
         //boolean receptorDAB, String faros, String rines, String modelo 
-        if (convertible) {
+        if (convertible.equals(SI)) {
             valores.add(320.0);
         } else {
             valores.add(0.0);
         }
-        if (receptorDAB) {
+        if (receptorDAB.equals(SI)) {
             valores.add(80.0);
         } else {
             valores.add(0.0);
         }
-        if (faros.equals(SI)) {
+        if (faros.equals(LED)) {
             valores.add(30.0);
+        } else if (faros.equals(LASER)) {
+            valores.add(50.0);
         } else {
             valores.add(0.0);
         }
         valores.add(50.0);
-        if (rines.equals(SI)) {
+        if (rines.equals(R20)) {
             valores.add(65.0);
+        } else if (rines.equals(R21)) {
+            valores.add(70.0);
         } else {
             valores.add(0.0);
         }
         valores.add(350.0);
-        if (tapacubos) {
+        if (tapacubos.equals(SI)) {
             valores.add(100.0);
         } else {
             valores.add(0.0);
         }
-        if (elevadorSus) {
+        if (elevadorSus.equals(SI)) {
             valores.add(500.0);
         } else {
             valores.add(0.0);
         }
-        if (camaraFrontal) {
+        if (camaraFrontal.equals(SI)) {
             valores.add(120.0);
         } else {
             valores.add(0.0);

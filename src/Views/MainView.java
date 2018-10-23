@@ -232,15 +232,15 @@ public abstract class MainView extends JFrame {
 
     }
 
-    public String getCmbConvertible() {
+    public String getCmbConvertibleValue() {
         return (String)cmbConvertible.getSelectedItem();
     }
 
-    public String getCmbReceptorDAB() {
+    public String getCmbReceptorDABValue() {
         return (String)cmbReceptorDAB.getSelectedItem();
     }
 
-    public String getCmbFaros() {
+    public String getCmbFarosValue() {
         return (String)cmbFaros.getSelectedItem();
     }
 
@@ -248,7 +248,7 @@ public abstract class MainView extends JFrame {
         return clcColor;
     }
 
-    public String getCmbRines() {
+    public String getCmbRinesValue() {
         return (String)cmbRines.getSelectedItem();
     }
 
@@ -298,5 +298,24 @@ public abstract class MainView extends JFrame {
     public JPanel getButtonPanel() {
         return buttonPanel;
     }
+
+    public JComboBox getCmbConvertible() {
+        return cmbConvertible;
+    }
+
+    public JComboBox getCmbReceptorDAB() {
+        return cmbReceptorDAB;
+    }
+
+    public JComboBox getCmbFaros() {
+        return cmbFaros;
+    }
+
+    public JComboBox getCmbRines() {
+        return cmbRines;
+    }
+    
+    
+    
 
 }

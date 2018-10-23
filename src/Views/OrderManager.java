@@ -236,14 +236,15 @@ class ButtonHandler implements ActionListener {
             if (orderType.equalsIgnoreCase(OrderManager.FE_ORDER)) {
 
                 AllFerrariOrders allFerrari = AllFerrariOrders.getAllFerrariOrders();
+                allFerrari.a();
                 FerrariOrder orderFerrari = null;
                 while (allFerrari.hasNext() && orderFerrari == null) {
                     orderFerrari = (FerrariOrder) allFerrari.next();
-                    if (orderFerrari.getOrderId() == orderID) {
-                        break;
+                    if (orderFerrari.getOrderId() != orderID) {
+                        orderFerrari = null;
                     }
                 }
-                if (true/*orderFerrari!=null*/) {
+                if (orderFerrari!=null) {
                     IViewBuilder builder = new QueryViewBuilder(new FerrariViewBuilder(), orderFerrari);
                     ViewDirector viewDirector = new ViewDirector(builder);
                     viewDirector.launchView();
@@ -255,14 +256,15 @@ class ButtonHandler implements ActionListener {
             if (orderType.equalsIgnoreCase(OrderManager.BMW_ORDER)) {
 
                 AllBMWOrders allBMW = AllBMWOrders.getAllBMWOrders();
+                allBMW.a();
                 BMWOrder orderBMW = null;
-                while (allBMW.hasNext() && orderBMW == null) {
+                while (allBMW.hasNext() && orderBMW == null) {                    
                     orderBMW = (BMWOrder) allBMW.next();
-                    if (orderBMW.getOrderId() == orderID) {
-                        break;
+                    if (orderBMW.getOrderId() != orderID) {
+                        orderBMW = null;                        
                     }
                 }
-                if (true/*orderFerrari!=null*/) {
+                if (orderBMW!=null) {
                     IViewBuilder builder = new QueryViewBuilder(new BMWViewBuilder(), orderBMW);
                     ViewDirector viewDirector = new ViewDirector(builder);
                     viewDirector.launchView();
@@ -272,16 +274,17 @@ class ButtonHandler implements ActionListener {
             }
             if (orderType.equalsIgnoreCase(OrderManager.LAM_ORDER)) {
 
-                AllLamborghiniOrders allBMW = AllLamborghiniOrders.getAllLamborghiniOrders();
+                AllLamborghiniOrders allLamborghini = AllLamborghiniOrders.getAllLamborghiniOrders();
+                allLamborghini.a();
                 LamborghiniOrder orderLamborghini = null;
-                while (allBMW.hasNext() && orderLamborghini == null) {
-                    orderLamborghini = (LamborghiniOrder) allBMW.next();
-                    if (orderLamborghini.getOrderId() == orderID) {
-                        break;
+                while (allLamborghini.hasNext() && orderLamborghini == null) {
+                    orderLamborghini = (LamborghiniOrder) allLamborghini.next();
+                    if (orderLamborghini.getOrderId() != orderID) {                        
+                        orderLamborghini = null;
                     }
                 }
 
-                if (true/*orderFerrari!=null*/) {
+                if (orderLamborghini!=null) {                    
                     IViewBuilder builder = new QueryViewBuilder(new LamborghiniViewBuilder(), orderLamborghini);
                     ViewDirector viewDirector = new ViewDirector(builder);
                     viewDirector.launchView();
@@ -298,7 +301,7 @@ class ButtonHandler implements ActionListener {
             OrderVisitor visitor = objOrderManager.getObjVisitor();
             visitor.setOrderTotal(0);
 
-//Ferrari
+        //Ferrari
             AllFerrariOrders allFerrari = AllFerrariOrders.getAllFerrariOrders();
             allFerrari.a();
 
@@ -307,7 +310,7 @@ class ButtonHandler implements ActionListener {
                 ferrariOrder.accept(visitor);
             }
 
-//BMW
+        //BMW
             AllBMWOrders allBMW = AllBMWOrders.getAllBMWOrders();
             allBMW.a();
             while (allBMW.hasNext()) {
@@ -315,15 +318,14 @@ class ButtonHandler implements ActionListener {
                 bmwOrder.accept(visitor);
             }
 
-//Lamborghini
-
+            //Lamborghini
             AllLamborghiniOrders allLamborghini = AllLamborghiniOrders.getAllLamborghiniOrders();
             allLamborghini.a();
             while (allLamborghini.hasNext()) {
                 LamborghiniOrder lamborghiniOrder = (LamborghiniOrder) allLamborghini.next();
                 lamborghiniOrder.accept(visitor);
             }
-            
+
             totalResult = String.valueOf(visitor.getOrderTotal());
             objOrderManager.setTotalValue(totalResult);
         }

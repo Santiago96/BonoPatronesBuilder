@@ -8,10 +8,7 @@ package Views;
 
 import Model.AllLamborghiniOrders;
 import Model.LamborghiniOrder;
-import static Views.MainView.CREATE_ORDER;
-import static Views.MainView.EXIT;
-import static Views.MainView.REGRESAR;
-import static Views.MainView.SI;
+import static Views.MainView.*;
 
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
@@ -205,7 +202,7 @@ public class LamborghiniViewBuilder extends MainView implements IViewBuilder {
 class ButtonHandlerL implements ActionListener {
 
     LamborghiniViewBuilder objLamborghiniView;
-    int orderID;
+    int orderID=1;
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals(EXIT)) {
@@ -218,8 +215,7 @@ class ButtonHandlerL implements ActionListener {
             AllLamborghiniOrders allLamborghini = AllLamborghiniOrders.getAllLamborghiniOrders();
             allLamborghini.agregarAuto(lambo);
             System.out.println("\nOrden "+((MainView)objLamborghiniView).getTxtOrderId().getText()+" Lamborghini");
-            System.out.println("Tamaño Coleccion Lambo: "+allLamborghini.getData().size());
-                    
+            System.out.println("Tamaño Coleccion Lambo: "+allLamborghini.getData().size());                    
             orderID = allLamborghini.getData().size()+1;
             ((MainView)objLamborghiniView).getTxtOrderId().setText(String.valueOf(orderID));
             
@@ -241,15 +237,15 @@ class ButtonHandlerL implements ActionListener {
     private LamborghiniOrder capturarAtributos(LamborghiniViewBuilder objLamborghiniView) {
         //Capturar Atributos
 
-        boolean suspensionMR = objLamborghiniView.getCmbSuspensionMR().equals(SI);
-        boolean sEDeportivo = objLamborghiniView.getCmbSEDeportivo().equals(SI);
-        boolean telemetriaL = objLamborghiniView.getCmbTelemetriaL().equals(SI);
+        String suspensionMR = (String) objLamborghiniView.getCmbSuspensionMR().getSelectedItem();
+        String sEDeportivo = (String) objLamborghiniView.getCmbSEDeportivo().getSelectedItem();
+        String telemetriaL = (String) objLamborghiniView.getCmbTelemetriaL().getSelectedItem();
         int orderId = Integer.parseInt(objLamborghiniView.getTxtOrderId().getText());
-        boolean convertible = objLamborghiniView.getCmbConvertible().equals(SI);
-        boolean receptorDAB = objLamborghiniView.getCmbReceptorDAB().equals(SI);
-        String faros = objLamborghiniView.getCmbFaros();
+        String convertible = objLamborghiniView.getCmbConvertibleValue();
+        String receptorDAB = objLamborghiniView.getCmbReceptorDABValue();
+        String faros = objLamborghiniView.getCmbFarosValue();
         //String color = objLamborghiniView.
-        String rines = objLamborghiniView.getCmbRines();
+        String rines = objLamborghiniView.getCmbRinesValue();
         String modelo = objLamborghiniView.getCmbModeloValue();
 
         HashMap<String, Object> data = generarData(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, rines, modelo);
@@ -258,7 +254,7 @@ class ButtonHandlerL implements ActionListener {
 
     }
 
-    private HashMap<String, Object> generarData(boolean suspensionMR, boolean sEDeportivo, boolean telemetriaL, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+    private HashMap<String, Object> generarData(String suspensionMR, String sEDeportivo, String telemetriaL, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
         HashMap<String, Object> data = new HashMap();
         data.put("Suspension", suspensionMR);
         data.put("Deportivo", sEDeportivo);
@@ -272,42 +268,46 @@ class ButtonHandlerL implements ActionListener {
         return data;
     }
 
-    private Vector obtenerValores(boolean suspensionMR, boolean sEDeportivo, boolean telemetriaL, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+    private Vector obtenerValores(String suspensionMR, String sEDeportivo, String telemetriaL, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
         Vector valores = new Vector();
         //boolean receptorDAB, String faros, String rines, String modelo 
-        if (convertible) {
+        if (convertible.equals(SI)) {
             valores.add(320.0);
         } else {
             valores.add(0.0);
         }
-        if (receptorDAB) {
+        if (receptorDAB.equals(SI)) {
             valores.add(80.0);
         } else {
             valores.add(0.0);
         }
-        if (faros.equals(SI)) {
+        if (faros.equals(LED)) {
             valores.add(30.0);
+        } else if (faros.equals(LASER)) {
+            valores.add(50.0);
         } else {
             valores.add(0.0);
         }
         valores.add(50.0);
-        if (rines.equals(SI)) {
+        if (rines.equals(R20)) {
             valores.add(65.0);
+        } else if (rines.equals(R21)) {
+            valores.add(70.0);
         } else {
             valores.add(0.0);
         }
         valores.add(350.0);
-        if (suspensionMR) {
+        if (suspensionMR.equals(SI)) {
             valores.add(100.0);
         } else {
             valores.add(0.0);
         }
-        if (sEDeportivo) {
+        if (sEDeportivo.equals(SI)) {
             valores.add(500.0);
         } else {
             valores.add(0.0);
         }
-        if (telemetriaL) {
+        if (telemetriaL.equals(SI)) {
             valores.add(120.0);
         } else {
             valores.add(0.0);

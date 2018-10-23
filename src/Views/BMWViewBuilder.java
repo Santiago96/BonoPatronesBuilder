@@ -8,10 +8,6 @@ package Views;
 import Model.AllBMWOrders;
 import Model.AllLamborghiniOrders;
 import Model.BMWOrder;
-import static Views.MainView.CREATE_ORDER;
-import static Views.MainView.EXIT;
-import static Views.MainView.REGRESAR;
-import static Views.MainView.SI;
 import static Views.MainView.*;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -250,16 +246,16 @@ class ButtonHandlerB implements ActionListener {
     }
 
     private BMWOrder capturarAtributos(BMWViewBuilder objBMWView) {
-        boolean sistemaE = objBMWView.getCmbSElevacion().getSelectedItem().equals(SI);
-        boolean navegacion = objBMWView.getCmbNavegacionIS().getSelectedItem().equals(SI);
+        String sistemaE = (String) objBMWView.getCmbSElevacion().getSelectedItem();
+        String navegacion = (String) objBMWView.getCmbNavegacionIS().getSelectedItem();
         String diseñoInt = objBMWView.getCmbDiseñoIntValue();
         int orderId = Integer.parseInt(objBMWView.getTxtOrderId().getText());
-        boolean convertible = objBMWView.getCmbConvertible().equals(SI);
-        boolean receptorDAB = objBMWView.getCmbReceptorDAB().equals(SI);
-        String faros = objBMWView.getCmbFaros();
-        System.out.println(objBMWView.getCmbFaros());
+        String convertible = objBMWView.getCmbConvertibleValue();
+        String receptorDAB = objBMWView.getCmbReceptorDABValue();
+        String faros = objBMWView.getCmbFarosValue();
+        System.out.println(objBMWView.getCmbFarosValue());
         //String color = objLamborghiniView.
-        String rines = objBMWView.getCmbRines();
+        String rines = objBMWView.getCmbRinesValue();
         String modelo = objBMWView.getCmbModeloValue();
         
         System.out.println(navegacion);
@@ -270,7 +266,7 @@ class ButtonHandlerB implements ActionListener {
         return new BMWOrder(orderID, (double) valores.get(0), (double) valores.get(1), (double) valores.get(2), (double) valores.get(3), (double) valores.get(4), (double) valores.get(5), (double) valores.get(6), (double) valores.get(7), (double) valores.get(8), data);
     }
 
-    private HashMap<String, Object> generarData(boolean sistemaE, boolean navegacion, String diseñoInt, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+    private HashMap<String, Object> generarData(String sistemaE, String navegacion, String diseñoInt, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
         HashMap<String, Object> data = new HashMap();
         data.put("SistemaElevacion", sistemaE);
         data.put("Navegacion", navegacion);
@@ -284,15 +280,15 @@ class ButtonHandlerB implements ActionListener {
         return data;
     }
 
-    private Vector obtenerValores(boolean sistemaE, boolean navegacion, String diseñoInt, int orderId, boolean convertible, boolean receptorDAB, String faros, String rines, String modelo) {
+    private Vector obtenerValores(String sistemaE, String navegacion, String diseñoInt, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
         Vector valores = new Vector();
         //boolean receptorDAB, String faros, String rines, String modelo 
-        if (convertible) {
+        if (convertible.equals(SI)) {
             valores.add(320.0);
         } else {
             valores.add(0.0);
         }
-        if (receptorDAB) {
+        if (receptorDAB.equals(SI)) {
             valores.add(80.0);
         } else {
             valores.add(0.0);
@@ -315,12 +311,12 @@ class ButtonHandlerB implements ActionListener {
             valores.add(0.0);
         }
         valores.add(350.0);
-        if (sistemaE) {
+        if (sistemaE.equals(SI)) {
             valores.add(100.0);
         } else {
             valores.add(0.0);
         }
-        if (navegacion) {
+        if (navegacion.equals(SI)) {            
             valores.add(500.0);
         } else {
             valores.add(0.0);
