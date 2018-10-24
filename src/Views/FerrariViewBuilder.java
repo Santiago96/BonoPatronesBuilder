@@ -250,7 +250,7 @@ class ButtonHandlerF implements ActionListener {
         return new FerrariOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8), data);
     }
 
-    private HashMap<String, Object> generarData(String tapacubos, String elevadorSus, String camaraFrontal, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
+    public static HashMap<String, Object> generarData(String tapacubos, String elevadorSus, String camaraFrontal, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
         HashMap<String, Object> data = new HashMap();
         data.put("TapaCubos", tapacubos);
         data.put("ElevadorSuspension", elevadorSus);

@@ -248,9 +248,7 @@ class ButtonHandler implements ActionListener {
                     IViewBuilder builder = new QueryViewBuilder(new FerrariViewBuilder(), orderFerrari);
                     ViewDirector viewDirector = new ViewDirector(builder);
                     viewDirector.launchView();
-                } else {
-                    //NO existe ID en dicha colección
-                }
+                } 
 
             }
             if (orderType.equalsIgnoreCase(OrderManager.BMW_ORDER)) {
@@ -268,8 +266,6 @@ class ButtonHandler implements ActionListener {
                     IViewBuilder builder = new QueryViewBuilder(new BMWViewBuilder(), orderBMW);
                     ViewDirector viewDirector = new ViewDirector(builder);
                     viewDirector.launchView();
-                } else {
-
                 }
             }
             if (orderType.equalsIgnoreCase(OrderManager.LAM_ORDER)) {
@@ -288,8 +284,6 @@ class ButtonHandler implements ActionListener {
                     IViewBuilder builder = new QueryViewBuilder(new LamborghiniViewBuilder(), orderLamborghini);
                     ViewDirector viewDirector = new ViewDirector(builder);
                     viewDirector.launchView();
-                } else {
-
                 }
 
             }

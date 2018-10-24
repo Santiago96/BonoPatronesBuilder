@@ -124,6 +124,12 @@ public class BMWOrder implements Order {
     public int getOrderId() {
         return orderId;
     }
+
+    public void setDatos(HashMap<String, Object> datos) {
+        this.datos = datos;
+    }
+    
+    
     
     
     

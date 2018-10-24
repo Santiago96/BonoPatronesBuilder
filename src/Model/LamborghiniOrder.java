@@ -138,6 +138,12 @@ public class LamborghiniOrder implements Order {
     public double getTelemetriaL() {
         return telemetriaL;
     }
+
+    public void setDatos(HashMap<String, Object> datos) {
+        this.datos = datos;
+    }
+    
+    
     
     
 

@@ -254,7 +254,7 @@ class ButtonHandlerL implements ActionListener {
 
     }
 
-    private HashMap<String, Object> generarData(String suspensionMR, String sEDeportivo, String telemetriaL, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
+    public static HashMap<String, Object> generarData(String suspensionMR, String sEDeportivo, String telemetriaL, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
         HashMap<String, Object> data = new HashMap();
         data.put("Suspension", suspensionMR);
         data.put("Deportivo", sEDeportivo);

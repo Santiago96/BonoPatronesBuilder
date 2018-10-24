@@ -68,7 +68,7 @@ public class AllFerrariOrders implements Iterator {
 
     @Override
     public void remove() {
-
+        
     }
 
     public Vector getData() {
