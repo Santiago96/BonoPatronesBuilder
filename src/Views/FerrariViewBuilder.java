@@ -20,7 +20,7 @@ import javax.swing.JLabel;
  *
  * @author Santiago
  */
-public class FerrariViewBuilder extends MainView implements IViewBuilder {
+public final class FerrariViewBuilder extends MainView implements IViewBuilder {
 
     public static final String SUPER = "812 SuperFast";
     public static final String SPIDER = "488 Spider";
@@ -73,8 +73,8 @@ public class FerrariViewBuilder extends MainView implements IViewBuilder {
         lblTapacubos = new JLabel("Tapacubos fibra Carbono:");
         lblElevadorSus = new JLabel("Elevador de Suspensión");
         lblCamaraFrontal = new JLabel("Cámara frontal (Dos vistas):");
-        
-        super.getTxtOrderId().setText(String.valueOf(AllFerrariOrders.getAllFerrariOrders().getData().size()+1));
+
+        super.getTxtOrderId().setText(String.valueOf(AllFerrariOrders.getAllFerrariOrders().getData().size() + 1));
     }
 
     @Override
@@ -156,12 +156,24 @@ public class FerrariViewBuilder extends MainView implements IViewBuilder {
         this.setVisible(true);
     }
 
+    public String getCmbModeloValue() {
+        return (String) cmbModelo.getSelectedItem();
+    }
+
+    public String getCmbTapacubosValue() {
+        return (String) cmbTapacubos.getSelectedItem();
+    }
+
+    public String getCmbElevadorSusValue() {
+        return (String) cmbElevadorSus.getSelectedItem();
+    }
+
+    public String getCmbCamaraFrontalValue() {
+        return (String) cmbCamaraFrontal.getSelectedItem();
+    }
+
     public JComboBox getCmbModelo() {
         return cmbModelo;
-    }
-    
-    public String getCmbModeloValue() {
-        return (String)cmbModelo.getSelectedItem();
     }
 
     public JComboBox getCmbTapacubos() {
@@ -191,16 +203,13 @@ public class FerrariViewBuilder extends MainView implements IViewBuilder {
     public JLabel getLblCamaraFrontal() {
         return lblCamaraFrontal;
     }
-    
-    
 
 }
 
 class ButtonHandlerF implements ActionListener {
 
     FerrariViewBuilder objFerrariView;
-    int orderID=1;
-    
+    int orderID = 1;
 
     public void actionPerformed(ActionEvent e) {
 
@@ -208,14 +217,14 @@ class ButtonHandlerF implements ActionListener {
             System.exit(1);
         }
         if (e.getActionCommand().equals(CREATE_ORDER)) {
-            
+
             FerrariOrder ferrari = capturarAtributos(objFerrariView);
             AllFerrariOrders allFerrari = AllFerrariOrders.getAllFerrariOrders();
             allFerrari.agregarAuto(ferrari);
-            System.out.println("\nOrden "+((MainView)objFerrariView).getTxtOrderId().getText()+" Creada - Ferrari");
-            System.out.println("Tamaño Coleccion Ferrari: "+allFerrari.getData().size());
-            orderID = allFerrari.getData().size()+1;
-            ((MainView)objFerrariView).getTxtOrderId().setText(String.valueOf(orderID));
+            System.out.println("\nOrden " + ((MainView) objFerrariView).getTxtOrderId().getText() + " Creada - Ferrari");
+            System.out.println("Tamaño Coleccion Ferrari: " + allFerrari.getData().size());
+            orderID = allFerrari.getData().size() + 1;
+            ((MainView) objFerrariView).getTxtOrderId().setText(String.valueOf(orderID));
         }
 
         if (e.getActionCommand().equals(REGRESAR)) {
@@ -232,9 +241,10 @@ class ButtonHandlerF implements ActionListener {
     }
 
     private FerrariOrder capturarAtributos(FerrariViewBuilder objFerrariView) {
-        String tapacubos = (String)objFerrariView.getCmbTapacubos().getSelectedItem();
-        String elevadorSus = (String)objFerrariView.getCmbElevadorSus().getSelectedItem();
-        String camaraFrontal = (String)objFerrariView.getCmbCamaraFrontal().getSelectedItem();
+        
+        String tapacubos = objFerrariView.getCmbTapacubosValue();
+        String elevadorSus = objFerrariView.getCmbElevadorSusValue();
+        String camaraFrontal = objFerrariView.getCmbCamaraFrontalValue();
         int orderId = Integer.parseInt(objFerrariView.getTxtOrderId().getText());
         String convertible = objFerrariView.getCmbConvertibleValue();
         String receptorDAB = objFerrariView.getCmbReceptorDABValue();
@@ -242,12 +252,11 @@ class ButtonHandlerF implements ActionListener {
         String color = objFerrariView.getCmbColorValue();
         String rines = objFerrariView.getCmbRinesValue();
         String modelo = objFerrariView.getCmbModeloValue();
-        
-        HashMap<String, Object> data = generarData(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,color,rines,modelo);
-        Vector valores = obtenerValores(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,color,rines,modelo);
-        
-        
-        return new FerrariOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8) , data);
+
+        HashMap<String, Object> data = generarData(tapacubos, elevadorSus, camaraFrontal, orderId, convertible, receptorDAB, faros, color, rines, modelo);
+        Vector valores = obtenerValores(tapacubos, elevadorSus, camaraFrontal, orderId, convertible, receptorDAB, faros, color, rines, modelo);
+
+        return new FerrariOrder(orderID, (double) valores.get(0), (double) valores.get(1), (double) valores.get(2), (double) valores.get(3), (double) valores.get(4), (double) valores.get(5), (double) valores.get(6), (double) valores.get(7), (double) valores.get(8), data);
     }
 
     public static HashMap<String, Object> generarData(String tapacubos, String elevadorSus, String camaraFrontal, int orderId, String convertible, String receptorDAB, String faros, String color, String rines, String modelo) {
@@ -285,17 +294,17 @@ class ButtonHandlerF implements ActionListener {
         } else {
             valores.add(0.0);
         }
-        
+
         if (color.equals(METALICO)) {
             valores.add(60.0);
         } else if (color.equals(NOMETALICO)) {
             valores.add(50.0);
-        } else if(color.equals(HISTORICO) || color.equals(ESPECIAL)){
+        } else if (color.equals(HISTORICO) || color.equals(ESPECIAL)) {
             valores.add(70.0);
-        }else{
+        } else {
             valores.add(0.0);
         }
-        
+
         if (rines.equals(R20)) {
             valores.add(65.0);
         } else if (rines.equals(R21)) {

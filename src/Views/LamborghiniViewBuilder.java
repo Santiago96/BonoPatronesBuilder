@@ -5,7 +5,6 @@
  */
 package Views;
 
-
 import Model.AllLamborghiniOrders;
 import Model.LamborghiniOrder;
 import static Views.MainView.*;
@@ -22,7 +21,7 @@ import javax.swing.JLabel;
  *
  * @author Santiago
  */
-public class LamborghiniViewBuilder extends MainView implements IViewBuilder {
+public final class LamborghiniViewBuilder extends MainView implements IViewBuilder {
 
     public static final String URUS = "Urus";
     public static final String HURACAN = "Huracán";
@@ -80,8 +79,8 @@ public class LamborghiniViewBuilder extends MainView implements IViewBuilder {
         lblSuspensionMR = new JLabel("Suspensión Magnética Reológica:");
         lblSEDeportivo = new JLabel("Sistema de escape deportivo");
         lblTelemetriaL = new JLabel("Telemetria Lamborghini:");
-        
-        super.getTxtOrderId().setText(String.valueOf(AllLamborghiniOrders.getAllLamborghiniOrders().getData().size()+1));
+
+        super.getTxtOrderId().setText(String.valueOf(AllLamborghiniOrders.getAllLamborghiniOrders().getData().size() + 1));
 
     }
 
@@ -161,12 +160,24 @@ public class LamborghiniViewBuilder extends MainView implements IViewBuilder {
         this.setVisible(true);
     }
 
-    public JComboBox getCmbModelo() {
-        return cmbModelo;
-    }
-
     public String getCmbModeloValue() {
         return (String) cmbModelo.getSelectedItem();
+    }
+
+    public String getCmbSuspensionMRValue() {
+        return (String) cmbSuspensionMR.getSelectedItem();
+    }
+
+    public String getCmbSEDeportivoValue() {
+        return (String) cmbSEDeportivo.getSelectedItem();
+    }
+
+    public String getCmbTelemetriaLValue() {
+        return (String) cmbTelemetriaL.getSelectedItem();
+    }
+
+    public JComboBox getCmbModelo() {
+        return cmbModelo;
     }
 
     public JComboBox getCmbSuspensionMR() {
@@ -202,7 +213,9 @@ public class LamborghiniViewBuilder extends MainView implements IViewBuilder {
 class ButtonHandlerL implements ActionListener {
 
     LamborghiniViewBuilder objLamborghiniView;
-    int orderID=1;
+    int orderID = 1;
+
+    @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals(EXIT)) {
@@ -214,11 +227,11 @@ class ButtonHandlerL implements ActionListener {
             LamborghiniOrder lambo = capturarAtributos(objLamborghiniView);
             AllLamborghiniOrders allLamborghini = AllLamborghiniOrders.getAllLamborghiniOrders();
             allLamborghini.agregarAuto(lambo);
-            System.out.println("\nOrden "+((MainView)objLamborghiniView).getTxtOrderId().getText()+" Lamborghini");
-            System.out.println("Tamaño Coleccion Lambo: "+allLamborghini.getData().size());                    
-            orderID = allLamborghini.getData().size()+1;
-            ((MainView)objLamborghiniView).getTxtOrderId().setText(String.valueOf(orderID));
-            
+            System.out.println("\nOrden " + ((MainView) objLamborghiniView).getTxtOrderId().getText() + " Lamborghini");
+            System.out.println("Tamaño Coleccion Lambo: " + allLamborghini.getData().size());
+            orderID = allLamborghini.getData().size() + 1;
+            ((MainView) objLamborghiniView).getTxtOrderId().setText(String.valueOf(orderID));
+
         }
 
         if (e.getActionCommand().equals(REGRESAR)) {
@@ -249,8 +262,8 @@ class ButtonHandlerL implements ActionListener {
         String modelo = objLamborghiniView.getCmbModeloValue();
 
         HashMap<String, Object> data = generarData(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, color, rines, modelo);
-        Vector valores = obtenerValores(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros,color, rines, modelo);
-        return new LamborghiniOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4),(double) valores.get(5), (double)valores.get(6),(double) valores.get(7), (double)valores.get(8), data);
+        Vector valores = obtenerValores(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, color, rines, modelo);
+        return new LamborghiniOrder(orderID, (double) valores.get(0), (double) valores.get(1), (double) valores.get(2), (double) valores.get(3), (double) valores.get(4), (double) valores.get(5), (double) valores.get(6), (double) valores.get(7), (double) valores.get(8), data);
 
     }
 
@@ -293,12 +306,12 @@ class ButtonHandlerL implements ActionListener {
             valores.add(60.0);
         } else if (color.equals(NOMETALICO)) {
             valores.add(50.0);
-        } else if(color.equals(HISTORICO) || color.equals(ESPECIAL)){
+        } else if (color.equals(HISTORICO) || color.equals(ESPECIAL)) {
             valores.add(70.0);
-        }else{
+        } else {
             valores.add(0.0);
         }
-        
+
         if (rines.equals(R20)) {
             valores.add(65.0);
         } else if (rines.equals(R21)) {

@@ -11,15 +11,7 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 /**
  *
@@ -36,13 +28,11 @@ public abstract class MainView extends JFrame {
 
     public static final String LED = "LED";
     public static final String LASER = "Láser";
-    
+
     public static final String METALICO = "Metálico";
     public static final String NOMETALICO = "No Metálico";
     public static final String HISTORICO = "Histórico";
-    public static final String ESPECIAL= "Especial";
-    
-    
+    public static final String ESPECIAL = "Especial";
 
     public static final String R20 = "20\"";
     public static final String R21 = "21\"";
@@ -62,9 +52,9 @@ public abstract class MainView extends JFrame {
 
     private JButton createOrderButton, regresarButton, exitButton;
 
-    private GridBagConstraints gbc,gbc2;
-    private GridBagLayout gridbag,gridbag2;
-    
+    private GridBagConstraints gbc, gbc2;
+    private GridBagLayout gridbag, gridbag2;
+
     private JPanel panel, buttonPanel;
 
     public MainView() {
@@ -95,7 +85,7 @@ public abstract class MainView extends JFrame {
         txtOrderId = new JTextField(10);
         txtOrderId.setEditable(false);
         boolean primera = true;
-        if(primera){
+        if (primera) {
             txtOrderId.setText("1");
             primera = false;
         }
@@ -226,7 +216,6 @@ public abstract class MainView extends JFrame {
         gbc.insets.right = 2;
         gbc.insets.top = 40;
 
-        
         //****************************************************
         //Add the buttons and the log to the frame
         Container contentPane = getContentPane();
@@ -244,27 +233,23 @@ public abstract class MainView extends JFrame {
     }
 
     public String getCmbConvertibleValue() {
-        return (String)cmbConvertible.getSelectedItem();
+        return (String) cmbConvertible.getSelectedItem();
     }
 
     public String getCmbReceptorDABValue() {
-        return (String)cmbReceptorDAB.getSelectedItem();
+        return (String) cmbReceptorDAB.getSelectedItem();
     }
 
     public String getCmbFarosValue() {
-        return (String)cmbFaros.getSelectedItem();
+        return (String) cmbFaros.getSelectedItem();
     }
 
-    public JComboBox getCmbColor() {
-        return cmbColor;
-    }
-    
-    public String getCmbColorValue(){
+    public String getCmbColorValue() {
         return (String) cmbColor.getSelectedItem();
     }
 
     public String getCmbRinesValue() {
-        return (String)cmbRines.getSelectedItem();
+        return (String) cmbRines.getSelectedItem();
     }
 
     public JTextField getTxtOrderId() {
@@ -274,7 +259,6 @@ public abstract class MainView extends JFrame {
     public void setTxtOrderId(JTextField txtOrderId) {
         this.txtOrderId = txtOrderId;
     }
-    
 
     public JButton getCreateOrderButton() {
         return createOrderButton;
@@ -303,8 +287,6 @@ public abstract class MainView extends JFrame {
     public GridBagLayout getGridbag2() {
         return gridbag2;
     }
-    
-    
 
     public JPanel getPanel() {
         return panel;
@@ -329,8 +311,9 @@ public abstract class MainView extends JFrame {
     public JComboBox getCmbRines() {
         return cmbRines;
     }
-    
-    
-    
+
+    public JComboBox getCmbColor() {
+        return cmbColor;
+    }
 
 }

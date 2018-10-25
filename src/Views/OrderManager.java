@@ -1,12 +1,6 @@
 package Views;
 
-import Model.AllBMWOrders;
-import Model.AllFerrariOrders;
-import Model.AllLamborghiniOrders;
-import Model.BMWOrder;
-import Model.FerrariOrder;
-import Model.LamborghiniOrder;
-import Model.OrderVisitor;
+import Model.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

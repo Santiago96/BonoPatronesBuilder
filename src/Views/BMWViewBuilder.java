@@ -6,24 +6,21 @@
 package Views;
 
 import Model.AllBMWOrders;
-import Model.AllLamborghiniOrders;
 import Model.BMWOrder;
 import static Views.MainView.*;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 /**
  *
  * @author Santiago
  */
-public class BMWViewBuilder extends MainView implements IViewBuilder {
+public final class BMWViewBuilder extends MainView implements IViewBuilder {
 
     public static final String I8R = "i8Roadster";
     public static final String M240I = "M240i";
@@ -166,20 +163,28 @@ public class BMWViewBuilder extends MainView implements IViewBuilder {
         super.getExitButton().addActionListener(new ButtonHandler());
     }
 
-    public JComboBox getCmbModelo() {
-        return cmbModelo;
-    }
-
     public String getCmbModeloValue() {
         return (String) cmbModelo.getSelectedItem();
     }
 
-    public JComboBox getCmbDiseñoInt() {
-        return cmbDiseñoInt;
-    }
-
     public String getCmbDiseñoIntValue() {
         return (String) cmbDiseñoInt.getSelectedItem();
+    }
+
+    public String getCmbNavegacionISValue() {
+        return (String) cmbNavegacionIS.getSelectedItem();
+    }
+
+    public String getCmbSElevacionValue() {
+        return (String) cmbSElevacion.getSelectedItem();
+    }
+
+    public JComboBox getCmbModelo() {
+        return cmbModelo;
+    }
+
+    public JComboBox getCmbDiseñoInt() {
+        return cmbDiseñoInt;
     }
 
     public JComboBox getCmbNavegacionIS() {
@@ -214,6 +219,7 @@ class ButtonHandlerB implements ActionListener {
 
     int orderID = 1;
 
+    @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals(EXIT)) {
@@ -246,18 +252,18 @@ class ButtonHandlerB implements ActionListener {
     }
 
     private BMWOrder capturarAtributos(BMWViewBuilder objBMWView) {
-        String sistemaE = (String) objBMWView.getCmbSElevacion().getSelectedItem();
-        String navegacion = (String) objBMWView.getCmbNavegacionIS().getSelectedItem();
+        
+        String sistemaE = objBMWView.getCmbSElevacionValue();
+        String navegacion = objBMWView.getCmbNavegacionISValue();
         String diseñoInt = objBMWView.getCmbDiseñoIntValue();
         int orderId = Integer.parseInt(objBMWView.getTxtOrderId().getText());
         String convertible = objBMWView.getCmbConvertibleValue();
         String receptorDAB = objBMWView.getCmbReceptorDABValue();
         String faros = objBMWView.getCmbFarosValue();
-        System.out.println(objBMWView.getCmbFarosValue());
         String color = objBMWView.getCmbColorValue();
         String rines = objBMWView.getCmbRinesValue();
         String modelo = objBMWView.getCmbModeloValue();
-        
+
         System.out.println(navegacion);
 
         HashMap<String, Object> data = generarData(sistemaE, navegacion, diseñoInt, orderId, convertible, receptorDAB, faros, color, rines, modelo);
@@ -275,7 +281,7 @@ class ButtonHandlerB implements ActionListener {
         data.put("Convertible", convertible);
         data.put("Receptor", receptorDAB);
         data.put("Faros", faros);
-        data.put("Color",color);
+        data.put("Color", color);
         data.put("Rines", rines);
         data.put("Modelo", modelo);
         return data;
@@ -301,17 +307,17 @@ class ButtonHandlerB implements ActionListener {
         } else {
             valores.add(0.0);
         }
-        
+
         if (color.equals(METALICO)) {
             valores.add(60.0);
         } else if (color.equals(NOMETALICO)) {
             valores.add(50.0);
-        } else if(color.equals(HISTORICO) || color.equals(ESPECIAL)){
+        } else if (color.equals(HISTORICO) || color.equals(ESPECIAL)) {
             valores.add(70.0);
-        }else{
+        } else {
             valores.add(0.0);
         }
-        
+
         if (rines.equals(R20)) {
             valores.add(65.0);
         } else if (rines.equals(R21)) {
@@ -325,7 +331,7 @@ class ButtonHandlerB implements ActionListener {
         } else {
             valores.add(0.0);
         }
-        if (navegacion.equals(SI)) {            
+        if (navegacion.equals(SI)) {
             valores.add(500.0);
         } else {
             valores.add(0.0);
