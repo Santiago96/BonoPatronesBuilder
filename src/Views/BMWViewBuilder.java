@@ -281,7 +281,7 @@ class ButtonHandlerB implements ActionListener {
         return data;
     }
 
-    private Vector obtenerValores(String sistemaE, String navegacion, String diseñoInt, int orderId, String convertible, String receptorDAB, String faros, String color, String rines, String modelo) {
+    public static Vector obtenerValores(String sistemaE, String navegacion, String diseñoInt, int orderId, String convertible, String receptorDAB, String faros, String color, String rines, String modelo) {
         Vector valores = new Vector();
         //boolean receptorDAB, String faros, String rines, String modelo 
         if (convertible.equals(SI)) {
