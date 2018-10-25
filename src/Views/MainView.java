@@ -36,6 +36,13 @@ public abstract class MainView extends JFrame {
 
     public static final String LED = "LED";
     public static final String LASER = "Láser";
+    
+    public static final String METALICO = "Metálico";
+    public static final String NOMETALICO = "No Metálico";
+    public static final String HISTORICO = "Histórico";
+    public static final String ESPECIAL= "Especial";
+    
+    
 
     public static final String R20 = "20\"";
     public static final String R21 = "21\"";
@@ -45,7 +52,7 @@ public abstract class MainView extends JFrame {
     private JComboBox cmbConvertible;
     private JComboBox cmbReceptorDAB;
     private JComboBox cmbFaros;
-    private JColorChooser clcColor;
+    private JComboBox cmbColor;
     private JComboBox cmbRines;
 
     private JTextField txtOrderId;
@@ -74,7 +81,11 @@ public abstract class MainView extends JFrame {
         cmbFaros.addItem(MainView.LED);
         cmbFaros.addItem(MainView.LASER);
 
-        clcColor = new JColorChooser();
+        cmbColor = new JComboBox();
+        cmbColor.addItem(MainView.METALICO);
+        cmbColor.addItem(MainView.NOMETALICO);
+        cmbColor.addItem(MainView.ESPECIAL);
+        cmbColor.addItem(MainView.HISTORICO);
 
         cmbRines = new JComboBox();
         cmbRines.addItem(MainView.R20);
@@ -148,7 +159,7 @@ public abstract class MainView extends JFrame {
         buttonPanel.add(cmbConvertible);
         buttonPanel.add(cmbReceptorDAB);
         buttonPanel.add(cmbFaros);
-        //buttonPanel.add(clcColor);
+        buttonPanel.add(cmbColor);
         buttonPanel.add(cmbRines);
 
         //****************************************************
@@ -200,7 +211,7 @@ public abstract class MainView extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
         gbc.gridx = 1;
         gbc.gridy = 4;
-        gridbag.setConstraints(clcColor, gbc);
+        gridbag.setConstraints(cmbColor, gbc);
 
         gbc.anchor = GridBagConstraints.EAST;
         gbc.gridx = 0;
@@ -244,8 +255,12 @@ public abstract class MainView extends JFrame {
         return (String)cmbFaros.getSelectedItem();
     }
 
-    public JColorChooser getClcColor() {
-        return clcColor;
+    public JComboBox getCmbColor() {
+        return cmbColor;
+    }
+    
+    public String getCmbColorValue(){
+        return (String) cmbColor.getSelectedItem();
     }
 
     public String getCmbRinesValue() {

@@ -244,17 +244,17 @@ class ButtonHandlerL implements ActionListener {
         String convertible = objLamborghiniView.getCmbConvertibleValue();
         String receptorDAB = objLamborghiniView.getCmbReceptorDABValue();
         String faros = objLamborghiniView.getCmbFarosValue();
-        //String color = objLamborghiniView.
+        String color = objLamborghiniView.getCmbColorValue();
         String rines = objLamborghiniView.getCmbRinesValue();
         String modelo = objLamborghiniView.getCmbModeloValue();
 
-        HashMap<String, Object> data = generarData(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, rines, modelo);
-        Vector valores = obtenerValores(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, rines, modelo);
+        HashMap<String, Object> data = generarData(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros, color, rines, modelo);
+        Vector valores = obtenerValores(suspensionMR, sEDeportivo, telemetriaL, orderId, convertible, receptorDAB, faros,color, rines, modelo);
         return new LamborghiniOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4),(double) valores.get(5), (double)valores.get(6),(double) valores.get(7), (double)valores.get(8), data);
 
     }
 
-    public static HashMap<String, Object> generarData(String suspensionMR, String sEDeportivo, String telemetriaL, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
+    public static HashMap<String, Object> generarData(String suspensionMR, String sEDeportivo, String telemetriaL, int orderId, String convertible, String receptorDAB, String faros, String color, String rines, String modelo) {
         HashMap<String, Object> data = new HashMap();
         data.put("Suspension", suspensionMR);
         data.put("Deportivo", sEDeportivo);
@@ -263,12 +263,13 @@ class ButtonHandlerL implements ActionListener {
         data.put("Convertible", convertible);
         data.put("Receptor", receptorDAB);
         data.put("Faros", faros);
+        data.put("Color", color);
         data.put("Rines", rines);
         data.put("Modelo", modelo);
         return data;
     }
 
-    private Vector obtenerValores(String suspensionMR, String sEDeportivo, String telemetriaL, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
+    private Vector obtenerValores(String suspensionMR, String sEDeportivo, String telemetriaL, int orderId, String convertible, String receptorDAB, String faros, String color, String rines, String modelo) {
         Vector valores = new Vector();
         //boolean receptorDAB, String faros, String rines, String modelo 
         if (convertible.equals(SI)) {
@@ -288,7 +289,16 @@ class ButtonHandlerL implements ActionListener {
         } else {
             valores.add(0.0);
         }
-        valores.add(50.0);
+        if (color.equals(METALICO)) {
+            valores.add(60.0);
+        } else if (color.equals(NOMETALICO)) {
+            valores.add(50.0);
+        } else if(color.equals(HISTORICO) || color.equals(ESPECIAL)){
+            valores.add(70.0);
+        }else{
+            valores.add(0.0);
+        }
+        
         if (rines.equals(R20)) {
             valores.add(65.0);
         } else if (rines.equals(R21)) {

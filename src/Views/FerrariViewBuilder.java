@@ -239,18 +239,18 @@ class ButtonHandlerF implements ActionListener {
         String convertible = objFerrariView.getCmbConvertibleValue();
         String receptorDAB = objFerrariView.getCmbReceptorDABValue();
         String faros = objFerrariView.getCmbFarosValue();
-        //String color = objLamborghiniView.
+        String color = objFerrariView.getCmbColorValue();
         String rines = objFerrariView.getCmbRinesValue();
         String modelo = objFerrariView.getCmbModeloValue();
         
-        HashMap<String, Object> data = generarData(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,rines,modelo);
-        Vector valores = obtenerValores(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,rines,modelo);
+        HashMap<String, Object> data = generarData(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,color,rines,modelo);
+        Vector valores = obtenerValores(tapacubos,elevadorSus,camaraFrontal,orderId,convertible,receptorDAB,faros,color,rines,modelo);
         
         
-        return new FerrariOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8), data);
+        return new FerrariOrder(orderID, (double)valores.get(0), (double)valores.get(1), (double)valores.get(2), (double)valores.get(3), (double)valores.get(4), (double)valores.get(5), (double)valores.get(6), (double)valores.get(7), (double)valores.get(8) , data);
     }
 
-    public static HashMap<String, Object> generarData(String tapacubos, String elevadorSus, String camaraFrontal, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
+    public static HashMap<String, Object> generarData(String tapacubos, String elevadorSus, String camaraFrontal, int orderId, String convertible, String receptorDAB, String faros, String color, String rines, String modelo) {
         HashMap<String, Object> data = new HashMap();
         data.put("TapaCubos", tapacubos);
         data.put("ElevadorSuspension", elevadorSus);
@@ -259,12 +259,13 @@ class ButtonHandlerF implements ActionListener {
         data.put("Convertible", convertible);
         data.put("Receptor", receptorDAB);
         data.put("Faros", faros);
+        data.put("Color", color);
         data.put("Rines", rines);
         data.put("Modelo", modelo);
         return data;
     }
 
-    private Vector obtenerValores(String tapacubos, String elevadorSus, String camaraFrontal, int orderId, String convertible, String receptorDAB, String faros, String rines, String modelo) {
+    private Vector obtenerValores(String tapacubos, String elevadorSus, String camaraFrontal, int orderId, String convertible, String receptorDAB, String faros, String color, String rines, String modelo) {
         Vector valores = new Vector();
         //boolean receptorDAB, String faros, String rines, String modelo 
         if (convertible.equals(SI)) {
@@ -284,7 +285,17 @@ class ButtonHandlerF implements ActionListener {
         } else {
             valores.add(0.0);
         }
-        valores.add(50.0);
+        
+        if (color.equals(METALICO)) {
+            valores.add(60.0);
+        } else if (color.equals(NOMETALICO)) {
+            valores.add(50.0);
+        } else if(color.equals(HISTORICO) || color.equals(ESPECIAL)){
+            valores.add(70.0);
+        }else{
+            valores.add(0.0);
+        }
+        
         if (rines.equals(R20)) {
             valores.add(65.0);
         } else if (rines.equals(R21)) {
