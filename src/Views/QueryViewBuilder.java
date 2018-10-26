@@ -108,8 +108,7 @@ public class QueryViewBuilder extends MainView implements IViewBuilder {
 
     @Override
     public void initializePersonalizeForm() {
-        if (view instanceof FerrariViewBuilder) {
-            //Inicializar 
+        if (view instanceof FerrariViewBuilder) {            
             cmb1 = ((FerrariViewBuilder) view).getCmbModelo();
             cmb2 = ((FerrariViewBuilder) view).getCmbTapacubos();
             cmb3 = ((FerrariViewBuilder) view).getCmbElevadorSus();

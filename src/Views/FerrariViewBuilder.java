@@ -35,6 +35,7 @@ public final class FerrariViewBuilder extends MainView implements IViewBuilder {
     private JLabel lblModelo, lblTapacubos, lblElevadorSus, lblCamaraFrontal;
 
     public FerrariViewBuilder() {
+        super();
         initializeGeneralForm();
         initializePersonalizeForm();
         addComponents();

@@ -50,10 +50,10 @@ public class OrderManager extends JFrame {
         getTotalButton.setMnemonic(KeyEvent.VK_G);
         JButton createOrderButton
                 = new JButton(OrderManager.CREATE_ORDER);
-        getTotalButton.setMnemonic(KeyEvent.VK_C);
+        createOrderButton.setMnemonic(KeyEvent.VK_C);
         JButton consultOrderButton
                 = new JButton(OrderManager.CONSULT_ORDER);
-        getTotalButton.setMnemonic(KeyEvent.VK_B);
+        consultOrderButton.setMnemonic(KeyEvent.VK_B);
         JButton exitButton = new JButton(OrderManager.EXIT);
         exitButton.setMnemonic(KeyEvent.VK_X);
 

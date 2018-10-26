@@ -39,6 +39,7 @@ public final class LamborghiniViewBuilder extends MainView implements IViewBuild
     private JLabel lblModelo, lblSuspensionMR, lblSEDeportivo, lblTelemetriaL;
 
     public LamborghiniViewBuilder() {
+        super();
         initializeGeneralForm();
         initializePersonalizeForm();
         addComponents();
@@ -248,8 +249,6 @@ class ButtonHandlerL implements ActionListener {
     }
 
     private LamborghiniOrder capturarAtributos(LamborghiniViewBuilder objLamborghiniView) {
-        //Capturar Atributos
-
         String suspensionMR = (String) objLamborghiniView.getCmbSuspensionMR().getSelectedItem();
         String sEDeportivo = (String) objLamborghiniView.getCmbSEDeportivo().getSelectedItem();
         String telemetriaL = (String) objLamborghiniView.getCmbTelemetriaL().getSelectedItem();
@@ -283,8 +282,7 @@ class ButtonHandlerL implements ActionListener {
     }
 
     public static Vector obtenerValores(String suspensionMR, String sEDeportivo, String telemetriaL, int orderId, String convertible, String receptorDAB, String faros, String color, String rines, String modelo) {
-        Vector valores = new Vector();
-        //boolean receptorDAB, String faros, String rines, String modelo 
+        Vector valores = new Vector();        
         if (convertible.equals(SI)) {
             valores.add(320.0);
         } else {
