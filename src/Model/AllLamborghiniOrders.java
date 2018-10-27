@@ -26,7 +26,7 @@ public class AllLamborghiniOrders implements Iterator {
 
     }
 
-    public static AllLamborghiniOrders getAllLamborghiniOrders() {
+    public synchronized static AllLamborghiniOrders getAllLamborghiniOrders() {
         if (allLamborghiniOrder == null) {
             allLamborghiniOrder = new AllLamborghiniOrders();
         }

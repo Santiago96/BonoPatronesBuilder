@@ -39,7 +39,7 @@ public final class BMWViewBuilder extends MainView implements IViewBuilder {
 
     private JLabel lblModelo, lblDiseñoInt, lblNavegacionIS, lblSElevacion;
 
-    BMWViewBuilder() {
+    public BMWViewBuilder() {
         super();
         initializeGeneralForm();
         initializePersonalizeForm();

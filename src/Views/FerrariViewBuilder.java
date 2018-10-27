@@ -46,8 +46,8 @@ public final class FerrariViewBuilder extends MainView implements IViewBuilder {
 
     @Override
     public void initializeGeneralForm() {
-        super.setTitle("Ferrari Order");
-        super.setSize(400, 400);
+        setTitle("Ferrari Order");
+        setSize(400, 400);
     }
 
     @Override

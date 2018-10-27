@@ -25,7 +25,7 @@ public class AllBMWOrders implements IAllAutos, Iterator {
         data = new Vector();
     }
 
-    public static AllBMWOrders getAllBMWOrders() {
+    public synchronized static AllBMWOrders getAllBMWOrders() {
         if (allBMWOrder == null) {
             allBMWOrder = new AllBMWOrders();
         }

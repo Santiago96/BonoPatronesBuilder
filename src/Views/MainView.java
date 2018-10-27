@@ -85,10 +85,10 @@ public abstract class MainView extends JFrame {
         txtOrderId = new JTextField(10);
         txtOrderId.setEditable(false);
         boolean primera = true;
-        if (primera) {
+        /*if (primera) {
             txtOrderId.setText("1");
             primera = false;
-        }
+        }*/
 
         lblOrderId = new JLabel("Order ID:");
 
@@ -98,13 +98,13 @@ public abstract class MainView extends JFrame {
         lblColor = new JLabel("Color:");
         lblRines = new JLabel("Rines:");
 
-        createOrderButton = new JButton(CREATE_ORDER);
+        createOrderButton = new JButton(MainView.CREATE_ORDER);
         createOrderButton.setMnemonic(KeyEvent.VK_C);
 
-        regresarButton = new JButton(REGRESAR);
+        regresarButton = new JButton(MainView.REGRESAR);
         regresarButton.setMnemonic(KeyEvent.VK_R);
 
-        exitButton = new JButton(EXIT);
+        exitButton = new JButton(MainView.EXIT);
         exitButton.setMnemonic(KeyEvent.VK_X);
         //ButtonHandlerB objButtonHandler = new ButtonHandlerB(this);
         //For layout purposes, put the buttons in a separate panel        
