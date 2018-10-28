@@ -42,9 +42,10 @@ public final class LamborghiniViewBuilder extends MainView implements IViewBuild
         super();
         initializeGeneralForm();
         initializePersonalizeForm();
+        addEvents();
         addComponents();
         componentsPosition();
-        addEvents();
+        
     }
 
     @Override

@@ -84,11 +84,6 @@ public abstract class MainView extends JFrame {
 
         txtOrderId = new JTextField(10);
         txtOrderId.setEditable(false);
-        boolean primera = true;
-        /*if (primera) {
-            txtOrderId.setText("1");
-            primera = false;
-        }*/
 
         lblOrderId = new JLabel("Order ID:");
 

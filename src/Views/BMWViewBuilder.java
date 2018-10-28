@@ -43,9 +43,10 @@ public final class BMWViewBuilder extends MainView implements IViewBuilder {
         super();
         initializeGeneralForm();
         initializePersonalizeForm();
+        addEvents();
         addComponents();
         componentsPosition();
-        addEvents();
+        
     }
 
     @Override
