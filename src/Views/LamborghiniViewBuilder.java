@@ -154,7 +154,7 @@ public final class LamborghiniViewBuilder extends MainView implements IViewBuild
 
         super.getRegresarButton().addActionListener(objButtonHandler);
         super.getCreateOrderButton().addActionListener(objButtonHandler);
-        super.getExitButton().addActionListener(new ButtonHandler());
+            super.getExitButton().addActionListener(new ButtonHandlerL());
     }
 
     @Override

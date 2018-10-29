@@ -149,7 +149,7 @@ public final class FerrariViewBuilder extends MainView implements IViewBuilder {
 
         super.getRegresarButton().addActionListener(objButtonHandler);
         super.getCreateOrderButton().addActionListener(objButtonHandler);
-        super.getExitButton().addActionListener(new ButtonHandler());
+        super.getExitButton().addActionListener(new ButtonHandlerF());
 
     }
 
@@ -220,7 +220,7 @@ class ButtonHandlerF implements ActionListener {
         }
         if (e.getActionCommand().equals(CREATE_ORDER)) {
 
-            FerrariOrder ferrari = capturarAtributos(objFerrariView);
+            FerrariOrder ferrari = capturarAtributos();
             AllFerrariOrders allFerrari = AllFerrariOrders.getAllFerrariOrders();
             allFerrari.agregarAuto(ferrari);
             System.out.println("\nOrden " + ((MainView) objFerrariView).getTxtOrderId().getText() + " Creada - Ferrari");
@@ -242,12 +242,12 @@ class ButtonHandlerF implements ActionListener {
         objFerrariView = inObjFerrariView;
     }
 
-    private FerrariOrder capturarAtributos(FerrariViewBuilder objFerrariView) {
+    private FerrariOrder capturarAtributos() {
         
         String tapacubos = objFerrariView.getCmbTapacubosValue();
         String elevadorSus = objFerrariView.getCmbElevadorSusValue();
         String camaraFrontal = objFerrariView.getCmbCamaraFrontalValue();
-        int orderId = Integer.parseInt(objFerrariView.getTxtOrderId().getText());
+        int orderId = Integer.parseInt(objFerrariView.getTxtOrderIdValue());
         String convertible = objFerrariView.getCmbConvertibleValue();
         String receptorDAB = objFerrariView.getCmbReceptorDABValue();
         String faros = objFerrariView.getCmbFarosValue();

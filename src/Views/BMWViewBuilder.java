@@ -162,7 +162,7 @@ public final class BMWViewBuilder extends MainView implements IViewBuilder {
 
         super.getRegresarButton().addActionListener(objButtonHandler);
         super.getCreateOrderButton().addActionListener(objButtonHandler);
-        super.getExitButton().addActionListener(new ButtonHandler());
+        super.getExitButton().addActionListener(new ButtonHandlerB());
     }
 
     public String getCmbModeloValue() {

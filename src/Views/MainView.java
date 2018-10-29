@@ -251,6 +251,10 @@ public abstract class MainView extends JFrame {
         return txtOrderId;
     }
 
+    public String getTxtOrderIdValue() {
+        return txtOrderId.getText();
+    }
+    
     public void setTxtOrderId(JTextField txtOrderId) {
         this.txtOrderId = txtOrderId;
     }
