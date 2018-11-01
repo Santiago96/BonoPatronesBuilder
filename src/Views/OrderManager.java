@@ -295,7 +295,7 @@ class ButtonHandler implements ActionListener {
             allFerrari.a();
 
             while (allFerrari.hasNext()) {
-                FerrariOrder ferrariOrder = (FerrariOrder) allFerrari.next();
+                FerrariOrder ferrariOrder = (FerrariOrder)allFerrari.next();
                 ferrariOrder.accept(visitor);
             }
 

@@ -58,7 +58,6 @@ public class AllFerrariOrders implements Iterator {
     public Object next() {
 
         if (nextFerrariOrder == null) {
-            System.out.println("hola");
             throw new NoSuchElementException();
         } else {
             return nextFerrariOrder;
