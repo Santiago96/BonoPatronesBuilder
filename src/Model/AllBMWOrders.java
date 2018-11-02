@@ -44,7 +44,6 @@ public class AllBMWOrders implements IAllAutos, Iterator {
     @Override
     public boolean hasNext() {
 
-        boolean matchFound = false;
         nextBMWOrder = null;
 
         while (ec.hasMoreElements()) {
