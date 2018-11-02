@@ -226,7 +226,7 @@ class ButtonHandlerL implements ActionListener {
         if (e.getActionCommand().equals(CREATE_ORDER)) {
 
             //Crear objeto de tipo Lambo pasando por parametro los datos
-            LamborghiniOrder lambo = capturarAtributos(objLamborghiniView);
+            LamborghiniOrder lambo = capturarAtributos();
             AllLamborghiniOrders allLamborghini = AllLamborghiniOrders.getAllLamborghiniOrders();
             allLamborghini.agregarAuto(lambo);
             System.out.println("\nOrden " + ((MainView) objLamborghiniView).getTxtOrderId().getText() + " Lamborghini");
@@ -249,7 +249,7 @@ class ButtonHandlerL implements ActionListener {
         objLamborghiniView = inObjLamborghiniView;
     }
 
-    private LamborghiniOrder capturarAtributos(LamborghiniViewBuilder objLamborghiniView) {
+    private LamborghiniOrder capturarAtributos() {
         String suspensionMR = (String) objLamborghiniView.getCmbSuspensionMR().getSelectedItem();
         String sEDeportivo = (String) objLamborghiniView.getCmbSEDeportivo().getSelectedItem();
         String telemetriaL = (String) objLamborghiniView.getCmbTelemetriaL().getSelectedItem();

@@ -228,7 +228,7 @@ class ButtonHandlerB implements ActionListener {
             System.exit(1);
         }
         if (e.getActionCommand().equals(CREATE_ORDER)) {           
-            BMWOrder bmw = capturarAtributos(objBMWView);
+            BMWOrder bmw = capturarAtributos();
             AllBMWOrders allBMW = AllBMWOrders.getAllBMWOrders();
             allBMW.agregarAuto(bmw);
             //System.out.println("\nOrden " + ((MainView) objBMWView).getTxtOrderId().getText() + " Creada - BMW");
@@ -252,7 +252,7 @@ class ButtonHandlerB implements ActionListener {
         objBMWView = inObjBMWView;
     }
 
-    private BMWOrder capturarAtributos(BMWViewBuilder objBMWView) {
+    private BMWOrder capturarAtributos() {
         
         String sistemaE = objBMWView.getCmbSElevacionValue();
         String navegacion = objBMWView.getCmbNavegacionISValue();
