@@ -46,7 +46,7 @@ public final class BMWViewBuilder extends MainView implements IViewBuilder {
         addEvents();
         addComponents();
         componentsPosition();
-        
+
     }
 
     @Override
@@ -227,7 +227,7 @@ class ButtonHandlerB implements ActionListener {
         if (e.getActionCommand().equals(EXIT)) {
             System.exit(1);
         }
-        if (e.getActionCommand().equals(CREATE_ORDER)) {           
+        if (e.getActionCommand().equals(CREATE_ORDER)) {
             BMWOrder bmw = capturarAtributos();
             AllBMWOrders allBMW = AllBMWOrders.getAllBMWOrders();
             allBMW.agregarAuto(bmw);
@@ -253,18 +253,18 @@ class ButtonHandlerB implements ActionListener {
     }
 
     private BMWOrder capturarAtributos() {
-        
+
         String sistemaE = objBMWView.getCmbSElevacionValue();
         String navegacion = objBMWView.getCmbNavegacionISValue();
         String diseñoInt = objBMWView.getCmbDiseñoIntValue();
-        int orderId = Integer.parseInt(objBMWView.getTxtOrderId().getText());
+        int orderId = Integer.parseInt(objBMWView.getTxtOrderIdValue());
         String convertible = objBMWView.getCmbConvertibleValue();
-        String receptorDAB = objBMWView.getCmbReceptorDABValue();
         String faros = objBMWView.getCmbFarosValue();
+        String receptorDAB = objBMWView.getCmbReceptorDABValue();
         String color = objBMWView.getCmbColorValue();
         String rines = objBMWView.getCmbRinesValue();
         String modelo = objBMWView.getCmbModeloValue();
-        
+
         HashMap<String, Object> data = generarData(sistemaE, navegacion, diseñoInt, orderId, convertible, receptorDAB, faros, color, rines, modelo);
         Vector valores = obtenerValores(sistemaE, navegacion, diseñoInt, orderId, convertible, receptorDAB, faros, color, rines, modelo);
 

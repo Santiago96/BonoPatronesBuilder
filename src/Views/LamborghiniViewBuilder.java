@@ -250,10 +250,10 @@ class ButtonHandlerL implements ActionListener {
     }
 
     private LamborghiniOrder capturarAtributos() {
-        String suspensionMR = (String) objLamborghiniView.getCmbSuspensionMR().getSelectedItem();
-        String sEDeportivo = (String) objLamborghiniView.getCmbSEDeportivo().getSelectedItem();
-        String telemetriaL = (String) objLamborghiniView.getCmbTelemetriaL().getSelectedItem();
-        int orderId = Integer.parseInt(objLamborghiniView.getTxtOrderId().getText());
+        String suspensionMR = (String) objLamborghiniView.getCmbSuspensionMRValue();
+        String sEDeportivo = (String) objLamborghiniView.getCmbSEDeportivoValue();
+        String telemetriaL = (String) objLamborghiniView.getCmbTelemetriaLValue();
+        int orderId = Integer.parseInt(objLamborghiniView.getTxtOrderIdValue());
         String convertible = objLamborghiniView.getCmbConvertibleValue();
         String receptorDAB = objLamborghiniView.getCmbReceptorDABValue();
         String faros = objLamborghiniView.getCmbFarosValue();
@@ -303,7 +303,7 @@ class ButtonHandlerL implements ActionListener {
         }
         if (color.equals(METALICO)) {
             valores.add(60.0);
-        } else if (color.equals(NOMETALICO)) {
+            } else if (color.equals(NOMETALICO)) {
             valores.add(50.0);
         } else if (color.equals(HISTORICO) || color.equals(ESPECIAL)) {
             valores.add(70.0);
