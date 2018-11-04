@@ -207,7 +207,7 @@ class ButtonHandler implements ActionListener {
                 IViewBuilder builder = new FerrariViewBuilder();
                 ViewDirector viewDirector = new ViewDirector(builder);
                 viewDirector.launchView();
-                objOrderManager.setVisible(false);
+                //objOrderManager.setVisible(false);
             }
             if (orderType.equalsIgnoreCase(OrderManager.BMW_ORDER)) {
                 IViewBuilder builder = new BMWViewBuilder();

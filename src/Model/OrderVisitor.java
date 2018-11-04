@@ -12,7 +12,15 @@ package Model;
 public class OrderVisitor implements VisitorInterface {
 
     private double orderTotal;
-    private double impuesto = 0.19;
+    
+    private double vConvertible;
+    private double vReceptorDAB;
+    private double vFaros;
+    private double vColor;
+    private double vRines;
+    private double vModelo;
+    
+    private final double impuesto = 0.19; 
 
     public OrderVisitor() {
     }
@@ -23,27 +31,63 @@ public class OrderVisitor implements VisitorInterface {
 
     @Override
     public void visit(BMWOrder bmwo) {
-        double cifraG = bmwo.getvConvertible() + bmwo.getvReceptorDAB() + bmwo.getvFaros() + bmwo.getvColor() + bmwo.getvRines() + bmwo.getvModelo();
-        double cifraImpuesto = (bmwo.getvDiseñoInt() + bmwo.getvNavegacionIS() + bmwo.getvElevacion()) * impuesto;
-        double cifraE = bmwo.getvDiseñoInt() + bmwo.getvNavegacionIS() + bmwo.getvElevacion() + cifraImpuesto;
-        orderTotal = orderTotal + cifraG + cifraE;
+        
+        vConvertible = bmwo.getvConvertible();
+        vReceptorDAB = bmwo.getvReceptorDAB();
+        vFaros = bmwo.getvFaros();
+        vColor = bmwo.getvColor();
+        vRines = bmwo.getvRines();
+        vModelo = bmwo.getvModelo();
+        
+        double vDiseñoInt = bmwo.getvDiseñoInt();
+        double vNavegacionIS = bmwo.getvNavegacionIS();
+        double vElevacion = bmwo.getvElevacion();
+        
+        double cifraG = vConvertible + vReceptorDAB + vFaros + vColor + vRines + vModelo;
+        double cifraImpuesto = (vRines + vDiseñoInt + vNavegacionIS + vElevacion) * impuesto;
+        double cifraE = vDiseñoInt + vNavegacionIS + vElevacion;
+        orderTotal = orderTotal + cifraG + cifraE + cifraImpuesto;
 
     }
 
     @Override
     public void visit(FerrariOrder fo) {
-        double cifraG = fo.getvConvertible() + fo.getvReceptorDAB() + fo.getvFaros() + fo.getvColor() + fo.getvRines() + fo.getvModelo();
-        double cifraImpuesto = (fo.getvTapacubos() + fo.getvElevadorSus() + fo.getvCamaraFrontal()) * impuesto;
-        double cifraE = fo.getvTapacubos() + fo.getvElevadorSus() + fo.getvCamaraFrontal() + cifraImpuesto;
-        orderTotal = orderTotal + cifraG + cifraE;
+
+        vConvertible = fo.getvConvertible();
+        vReceptorDAB = fo.getvReceptorDAB();
+        vFaros = fo.getvFaros();
+        vColor = fo.getvColor();
+        vRines = fo.getvRines();
+        vModelo = fo.getvModelo();
+        
+        double vTapacubos = fo.getvTapacubos();
+        double vElevadorSus = fo.getvElevadorSus();
+        double vCamaraFrontal = fo.getvCamaraFrontal();
+    
+        double cifraG = vConvertible + vReceptorDAB + vFaros + vColor + vRines + vModelo;
+        double cifraImpuesto = (vFaros + vTapacubos + vElevadorSus + vCamaraFrontal) * impuesto;
+        double cifraE = vTapacubos + vElevadorSus + vCamaraFrontal;
+        orderTotal = orderTotal + cifraG + cifraE + cifraImpuesto;
     }
 
     @Override
     public void visit(LamborghiniOrder lo) {
-        double cifraG = lo.getvConvertible() + lo.getvReceptorDAB() + lo.getvFaros() + lo.getvColor() + lo.getvRines() + lo.getvModelo();
-        double cifraImpuesto = (lo.getSuspensionMR() + lo.getsEDeportivo() + lo.getTelemetriaL()) * impuesto;
-        double cifraE = lo.getSuspensionMR() + lo.getsEDeportivo() + lo.getTelemetriaL() + cifraImpuesto;
-        orderTotal = orderTotal + cifraG + cifraE;
+        
+        vConvertible = lo.getvConvertible();
+        vReceptorDAB = lo.getvReceptorDAB();
+        vFaros = lo.getvFaros();
+        vColor = lo.getvColor();
+        vRines = lo.getvRines();
+        vModelo = lo.getvModelo();
+        
+        double vSuspensionMR = lo.getSuspensionMR();
+        double vsEDeportivo = lo.getsEDeportivo();
+        double vTelemetriaL = lo.getTelemetriaL();
+        
+        double cifraG = vConvertible + vReceptorDAB + vFaros + vColor + vRines + vModelo;
+        double cifraImpuesto = (vSuspensionMR + vsEDeportivo + vTelemetriaL) * impuesto;
+        double cifraE = vSuspensionMR + vsEDeportivo + vTelemetriaL;
+        orderTotal = orderTotal + cifraG + cifraE + cifraImpuesto;
     }
 
     public void setOrderTotal(double orderTotal) {

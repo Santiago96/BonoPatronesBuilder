@@ -6,6 +6,7 @@
 package Model;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +29,7 @@ public class LamborghiniOrder implements Order {
 
 
 
+
     public LamborghiniOrder(int orderId, double vConvertible, double vReceptorDAB, double vFaros, double vColor, double vRines, double vModelo, double suspensionMR, double sEDeportivo, double telemetriaL,HashMap<String,Object> datos) {
         this.orderId = orderId;
         this.vConvertible = vConvertible;
@@ -47,6 +49,8 @@ public class LamborghiniOrder implements Order {
         v.visit(this);
     }
 
+    
+    
     public double getvConvertible() {
         return vConvertible;
     }
@@ -95,25 +99,18 @@ public class LamborghiniOrder implements Order {
         this.vModelo = vModelo;
     }
 
-    public double isSuspensionMR() {
-        return suspensionMR;
-    }
 
     public void setSuspensionMR(double suspensionMR) {
         this.suspensionMR = suspensionMR;
     }
 
-    public double issEDeportivo() {
-        return sEDeportivo;
-    }
+
 
     public void setsEDeportivo(double sEDeportivo) {
         this.sEDeportivo = sEDeportivo;
     }
 
-    public double isTelemetriaL() {
-        return telemetriaL;
-    }
+
 
     public void setTelemetriaL(double telemetriaL) {
         this.telemetriaL = telemetriaL;
