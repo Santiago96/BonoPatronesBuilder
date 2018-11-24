@@ -285,16 +285,28 @@ public class QueryViewBuilder extends MainView implements IViewBuilder {
         return cmb1;
     }
 
+    public String getCmb1Value() {
+        return (String) cmb1.getSelectedItem();
+    }
     public JComboBox getCmb2() {
         return cmb2;
+    }
+    public String getCmb2Value() {
+        return (String) cmb2.getSelectedItem();
     }
 
     public JComboBox getCmb3() {
         return cmb3;
     }
+    public String getCmb3Value() {
+        return (String) cmb3.getSelectedItem();
+    }
 
     public JComboBox getCmb4() {
         return cmb4;
+    }
+    public String getCmb4Value() {
+        return (String) cmb4.getSelectedItem();
     }
 
     public Order getOrder() {
@@ -320,40 +332,42 @@ class ButtonHandlerQ implements ActionListener {
 
         if (e.getActionCommand().equals(SAVE)) {
             Vector vector = null;
-            int orderID = Integer.parseInt(objQueryView.view.getTxtOrderId().getText());
             objQueryView.atributos(false);
             order = objQueryView.getOrder();
 
-            String convertible = (String) objQueryView.getCmbConvertible().getSelectedItem();
-            String faros = (String) objQueryView.getCmbFaros().getSelectedItem();
-            String color = (String) objQueryView.getCmbColor().getSelectedItem();
-            String receptorDAB = (String) objQueryView.getCmbReceptorDAB().getSelectedItem();
-            String rines = (String) objQueryView.getCmbRines().getSelectedItem();
+            String convertible = objQueryView.getCmbConvertibleValue();
+            String faros = objQueryView.getCmbFarosValue();
+            String color = objQueryView.getCmbColorValue();
+            String receptorDAB = objQueryView.getCmbReceptorDABValue();
+            String rines = objQueryView.getCmbRinesValue();
 
             if (order instanceof FerrariOrder) {
-                String modelo = (String) objQueryView.getCmb1().getSelectedItem();
-                String tapaCubos = (String) objQueryView.getCmb2().getSelectedItem();
-                String elevadorSus = (String) objQueryView.getCmb3().getSelectedItem();
-                String camaraFrontal = (String) objQueryView.getCmb4().getSelectedItem();
+                int orderID = Integer.parseInt(objQueryView.view.getTxtOrderIdValue());
+                String modelo = objQueryView.getCmb1Value();
+                String tapaCubos =  objQueryView.getCmb2Value();
+                String elevadorSus = objQueryView.getCmb3Value();
+                String camaraFrontal = objQueryView.getCmb4Value();
 
                 ((FerrariOrder) order).setDatos(ButtonHandlerF.generarData(tapaCubos, elevadorSus, camaraFrontal, ((FerrariOrder) order).getOrderId(), convertible, receptorDAB, faros, color, rines, modelo));
                 vector = ButtonHandlerF.obtenerValores(tapaCubos, elevadorSus, camaraFrontal, orderID, convertible, receptorDAB, faros, color, rines, modelo);
 
             }
             if (order instanceof BMWOrder) {
-                String modelo = (String) objQueryView.getCmb1().getSelectedItem();
-                String diseñoInt = (String) objQueryView.getCmb2().getSelectedItem();
-                String navegacion = (String) objQueryView.getCmb3().getSelectedItem();
-                String sistemaE = (String) objQueryView.getCmb4().getSelectedItem();
+                int orderID = Integer.parseInt(objQueryView.view.getTxtOrderIdValue());
+                String modelo = objQueryView.getCmb1Value();
+                String diseñoInt = objQueryView.getCmb2Value();
+                String navegacion = objQueryView.getCmb3Value();
+                String sistemaE = objQueryView.getCmb4Value();
 
                 ((BMWOrder) order).setDatos(ButtonHandlerB.generarData(sistemaE, navegacion, diseñoInt, ((BMWOrder) order).getOrderId(), convertible, receptorDAB, faros, color, rines, modelo));
                 vector = ButtonHandlerB.obtenerValores(sistemaE, navegacion, diseñoInt, orderID, convertible, receptorDAB, faros, color, rines, modelo);
             }
             if (order instanceof LamborghiniOrder) {
-                String modelo = (String) objQueryView.getCmb1().getSelectedItem();
-                String suspension = (String) objQueryView.getCmb2().getSelectedItem();
-                String deportivo = (String) objQueryView.getCmb3().getSelectedItem();
-                String telemetria = (String) objQueryView.getCmb4().getSelectedItem();
+                int orderID = Integer.parseInt(objQueryView.view.getTxtOrderIdValue());
+                String modelo = (String) objQueryView.getCmb1Value();
+                String suspension = (String) objQueryView.getCmb2Value();
+                String deportivo = (String) objQueryView.getCmb3Value();
+                String telemetria = (String) objQueryView.getCmb4Value();
 
                 ((LamborghiniOrder) order).setDatos(ButtonHandlerL.generarData(suspension, deportivo, telemetria, ((LamborghiniOrder) order).getOrderId(), convertible, receptorDAB, faros, color, rines, modelo));
                 vector = ButtonHandlerL.obtenerValores(suspension, deportivo, telemetria, orderID, convertible, receptorDAB, faros, color, rines, modelo);
