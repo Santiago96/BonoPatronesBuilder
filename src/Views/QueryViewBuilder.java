@@ -70,11 +70,11 @@ public class QueryViewBuilder extends MainView implements IViewBuilder {
         cmb3.setSelectedItem(fOrder.getDatos().get("ElevadorSuspension"));
         cmb4.setSelectedItem(fOrder.getDatos().get("CamaraFrontal"));
 
-        super.getCmbConvertible().setSelectedItem(fOrder.getDatos().get("Convertible"));
-        super.getCmbFaros().setSelectedItem(fOrder.getDatos().get("Faros"));
-        super.getCmbColor().setSelectedItem(fOrder.getDatos().get("Color"));
-        super.getCmbReceptorDAB().setSelectedItem(fOrder.getDatos().get("Receptor"));
-        super.getCmbRines().setSelectedItem(fOrder.getDatos().get("Rines"));
+        getCmbConvertible().setSelectedItem(fOrder.getDatos().get("Convertible"));
+        getCmbFaros().setSelectedItem(fOrder.getDatos().get("Faros"));
+        getCmbColor().setSelectedItem(fOrder.getDatos().get("Color"));
+        getCmbReceptorDAB().setSelectedItem(fOrder.getDatos().get("Receptor"));
+        getCmbRines().setSelectedItem(fOrder.getDatos().get("Rines"));
 
     }
 
@@ -84,11 +84,11 @@ public class QueryViewBuilder extends MainView implements IViewBuilder {
         cmb3.setSelectedItem(bmwOrder.getDatos().get("Navegacion"));
         cmb4.setSelectedItem(bmwOrder.getDatos().get("SistemaElevacion"));
 
-        super.getCmbConvertible().setSelectedItem(bmwOrder.getDatos().get("Convertible"));
-        super.getCmbFaros().setSelectedItem(bmwOrder.getDatos().get("Faros"));
-        super.getCmbColor().setSelectedItem(bmwOrder.getDatos().get("Color"));
-        super.getCmbReceptorDAB().setSelectedItem(bmwOrder.getDatos().get("Receptor"));
-        super.getCmbRines().setSelectedItem(bmwOrder.getDatos().get("Rines"));
+        getCmbConvertible().setSelectedItem(bmwOrder.getDatos().get("Convertible"));
+        getCmbFaros().setSelectedItem(bmwOrder.getDatos().get("Faros"));
+        getCmbColor().setSelectedItem(bmwOrder.getDatos().get("Color"));
+        getCmbReceptorDAB().setSelectedItem(bmwOrder.getDatos().get("Receptor"));
+        getCmbRines().setSelectedItem(bmwOrder.getDatos().get("Rines"));
 
     }
 
@@ -98,17 +98,17 @@ public class QueryViewBuilder extends MainView implements IViewBuilder {
         cmb3.setSelectedItem(lamborghiniOrder.getDatos().get("Deportivo"));
         cmb4.setSelectedItem(lamborghiniOrder.getDatos().get("Telemetria"));
 
-        super.getCmbConvertible().setSelectedItem(lamborghiniOrder.getDatos().get("Convertible"));
-        super.getCmbFaros().setSelectedItem(lamborghiniOrder.getDatos().get("Faros"));
-        super.getCmbColor().setSelectedItem(lamborghiniOrder.getDatos().get("Color"));
-        super.getCmbReceptorDAB().setSelectedItem(lamborghiniOrder.getDatos().get("Receptor"));
-        super.getCmbRines().setSelectedItem(lamborghiniOrder.getDatos().get("Rines"));
+        getCmbConvertible().setSelectedItem(lamborghiniOrder.getDatos().get("Convertible"));
+        getCmbFaros().setSelectedItem(lamborghiniOrder.getDatos().get("Faros"));
+        getCmbColor().setSelectedItem(lamborghiniOrder.getDatos().get("Color"));
+        getCmbReceptorDAB().setSelectedItem(lamborghiniOrder.getDatos().get("Receptor"));
+        getCmbRines().setSelectedItem(lamborghiniOrder.getDatos().get("Rines"));
 
     }
 
     @Override
     public void initializePersonalizeForm() {
-        if (view instanceof FerrariViewBuilder) {            
+        if (view instanceof FerrariViewBuilder) {
             cmb1 = ((FerrariViewBuilder) view).getCmbModelo();
             cmb2 = ((FerrariViewBuilder) view).getCmbTapacubos();
             cmb3 = ((FerrariViewBuilder) view).getCmbElevadorSus();
@@ -156,6 +156,11 @@ public class QueryViewBuilder extends MainView implements IViewBuilder {
 
         atributos(false);
 
+        crearBotones();
+
+    }
+
+    private void crearBotones() {
         btnEditar = new JButton(EDIT);
         btnGuardar = new JButton(SAVE);
         btnRegresar = new JButton(REGRESAR);
@@ -374,12 +379,12 @@ class ButtonHandlerQ implements ActionListener {
     }
 
     private void setPrecios(Vector vector, Order order) {
-        
+
         if (order instanceof FerrariOrder) {
             ((FerrariOrder) order).setvConvertible((double) vector.get(0));
             ((FerrariOrder) order).setvReceptorDAB((double) vector.get(1));
             ((FerrariOrder) order).setvFaros((double) vector.get(2));
-            ((FerrariOrder) order).setvColor((double) vector.get(3));            
+            ((FerrariOrder) order).setvColor((double) vector.get(3));
             ((FerrariOrder) order).setvRines((double) vector.get(4));
             ((FerrariOrder) order).setvModelo((double) vector.get(5));
             ((FerrariOrder) order).setvTapacubos((double) vector.get(6));
@@ -391,14 +396,13 @@ class ButtonHandlerQ implements ActionListener {
             ((BMWOrder) order).setvConvertible((double) vector.get(0));
             ((BMWOrder) order).setvReceptorDAB((double) vector.get(1));
             ((BMWOrder) order).setvFaros((double) vector.get(2));
-            ((BMWOrder) order).setvColor((double) vector.get(3));            
+            ((BMWOrder) order).setvColor((double) vector.get(3));
             ((BMWOrder) order).setvRines((double) vector.get(4));
             ((BMWOrder) order).setvModelo((double) vector.get(5));
             ((BMWOrder) order).setvDiseñoInt((double) vector.get(6));
             ((BMWOrder) order).setvNavegacionIS((double) vector.get(7));
             ((BMWOrder) order).setvElevacion((double) vector.get(8));
-            
-            
+
         }
 
         if (order instanceof LamborghiniOrder) {
