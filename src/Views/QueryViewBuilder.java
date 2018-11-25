@@ -350,7 +350,7 @@ class ButtonHandlerQ implements ActionListener {
 
                 ((FerrariOrder) order).setDatos(ButtonHandlerF.generarData(tapaCubos, elevadorSus, camaraFrontal, orderID, convertible, receptorDAB, faros, color, rines, modelo));
                 vector = ButtonHandlerF.obtenerValores(tapaCubos, elevadorSus, camaraFrontal, orderID, convertible, receptorDAB, faros, color, rines, modelo);
-
+                setPrecios(vector, order);
             }
             if (order instanceof BMWOrder) {
                 int orderID = ((BMWOrder) order).getOrderId();
@@ -361,19 +361,19 @@ class ButtonHandlerQ implements ActionListener {
 
                 ((BMWOrder) order).setDatos(ButtonHandlerB.generarData(sistemaE, navegacion, diseñoInt, orderID, convertible, receptorDAB, faros, color, rines, modelo));
                 vector = ButtonHandlerB.obtenerValores(sistemaE, navegacion, diseñoInt, orderID, convertible, receptorDAB, faros, color, rines, modelo);
+                setPrecios(vector, order);
             }
             if (order instanceof LamborghiniOrder) {
                 int orderID = ((LamborghiniOrder) order).getOrderId();
-                String modelo = (String) objQueryView.getCmb1Value();
-                String suspension = (String) objQueryView.getCmb2Value();
-                String deportivo = (String) objQueryView.getCmb3Value();
-                String telemetria = (String) objQueryView.getCmb4Value();
+                String modelo = objQueryView.getCmb1Value();
+                String suspension = objQueryView.getCmb2Value();
+                String deportivo = objQueryView.getCmb3Value();
+                String telemetria = objQueryView.getCmb4Value();
 
                 ((LamborghiniOrder) order).setDatos(ButtonHandlerL.generarData(suspension, deportivo, telemetria, orderID, convertible, receptorDAB, faros, color, rines, modelo));
                 vector = ButtonHandlerL.obtenerValores(suspension, deportivo, telemetria, orderID, convertible, receptorDAB, faros, color, rines, modelo);
+                setPrecios(vector, order);
             }
-
-            setPrecios(vector, order);
 
             objQueryView.setVisible(false);
 
