@@ -14,7 +14,7 @@ import java.util.Vector;
  *
  * @author olixe
  */
-public class AllLamborghiniOrders implements Iterator {
+public class AllLamborghiniOrders implements IAllAutos, Iterator{
 
     private static AllLamborghiniOrders allLamborghiniOrder;
     private Vector data;
